@@ -1,37 +1,47 @@
-details>summary {
-    list-style: none;
+details > summary {
+  list-style: none;
 }
 
-details>summary::-webkit-details-marker {
-    display: none;
+details > summary::-webkit-details-marker {
+  display: none;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 html {
-    font-family: Consolas, monaco, monospace;
+  font-family: Consolas, monaco, monospace;
 }
 
-.company-thumb, .profile-thumb {
-    object-fit: cover;
-    width: 86px;
-    height: 86px;
-    border-radius: 50%;
+.company-thumb,
+.profile-thumb {
+  object-fit: cover;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
 }
 
-.company-figure, .profile-figure {
-    display: block;
-    margin: auto;
-    margin-right: 20px;
+.company-figure,
+.profile-figure {
+  display: block;
+  margin: auto;
+  margin-right: 20px;
 }
 
-.company-summary {}
+.experience,
+.profile-header {
+  display: inline-flex;
+  width: 100%;
+}
 
-.experience, .profile-header {
-    display: inline-flex;
-    min-width: 100%;
+.employment {
+  display: list-item;
+}
+
+.figure-div,
+.details-div {
+  display: flex;
 }
