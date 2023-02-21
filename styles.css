@@ -29,6 +29,7 @@ html {
   display: block;
   margin: auto;
   margin-right: 20px;
+  margin-top: initial;
 }
 
 .experience,
@@ -37,11 +38,13 @@ html {
   width: 100%;
 }
 
-.employment {
-  display: list-item;
-}
-
 .figure-div,
 .details-div {
   display: flex;
+}
+
+.experience-section {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-bottom: 10px;
+  display: list-item;
 }
