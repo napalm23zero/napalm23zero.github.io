@@ -16,14 +16,14 @@ html {
     font-family: Consolas, monaco, monospace;
 }
 
-.company-thumb {
+.company-thumb, .profile-thumb {
     object-fit: cover;
     width: 86px;
     height: 86px;
     border-radius: 50%;
 }
 
-.company-figure {
+.company-figure, .profile-figure {
     display: block;
     margin: auto;
     margin-right: 20px;
@@ -31,7 +31,7 @@ html {
 
 .company-summary {}
 
-.experience {
+.experience, .header {
     display: inline-flex;
-    margin-right: 10%;
+    min-width: 100%;
 }
