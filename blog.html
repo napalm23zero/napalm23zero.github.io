@@ -30,11 +30,9 @@
   <section class="bloghero">
     <div class="wrap">
       <div class="bloghero__id reveal" id="blogId"></div>
-      <h1 class="reveal" data-d="1">Notes from <em>the build.</em></h1>
-      <p class="bloghero__sub reveal" data-d="2">Engineering, AI agents and hard-won lessons from banking-grade systems. New posts land here — bookmark this page to follow along.</p>
-      <div class="bloghero__tags reveal" data-d="3">
-        <span>Engineering</span><span>AI &amp; Operations</span><span>Architecture</span><span>Founder notes</span>
-      </div>
+      <h1 class="reveal" data-d="1" id="blogHeroTitle"></h1>
+      <p class="bloghero__sub reveal" data-d="2" id="blogHeroSub"></p>
+      <div class="bloghero__tags reveal" data-d="3" id="blogHeroTags"></div>
       <div class="bloghero__follow reveal" data-d="3" id="blogFollow"></div>
     </div>
   </section>
@@ -44,10 +42,7 @@
   <!-- ===== POSTS (content/posts) ===== -->
   <section class="section" id="blog">
     <div class="wrap">
-      <div class="section__head reveal" style="margin-bottom:28px">
-        <div class="eyebrow">All<span class="us">_</span>posts</div>
-        <h2>Latest writing.</h2>
-      </div>
+      <div id="blogListHead" style="margin-bottom:28px"></div>
       <div id="blogList" data-layout="grid"></div>
     </div>
   </section>
@@ -71,6 +66,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/content.js"></script>
 <script src="assets/js/blog.js"></script>

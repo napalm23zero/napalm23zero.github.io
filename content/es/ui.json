@@ -1,0 +1,69 @@
+{
+  "ui.language": "Idioma",
+
+  "nav.blog": "Leer mi blog",
+  "nav.resume": "CV en PDF",
+  "nav.contact": "Contacto",
+
+  "hero.cta1": "Explorar mi CV",
+  "hero.cta2": "Hablemos",
+
+  "resume.eyebrow": "El_CV",
+  "resume.title": "Diez años, condensados. <span class=\"accent\">Haz clic para profundizar.</span>",
+  "resume.intro": "Experiencia, cargos anteriores y el stack completo — organizados para que ojees o entres a fondo. Todo aquí refleja mi CV actual.",
+  "resume.via": "vía",
+  "resume.tab_exp": "Experiencia",
+  "resume.tab_earlier": "Cargos anteriores",
+  "resume.tab_skills": "Skills",
+  "resume.download": "Descargar PDF completo",
+
+  "work.eyebrow": "Trabajos_seleccionados",
+  "work.title": "Cosas que construí &amp; lancé.",
+  "work.intro": "Algunos sistemas que lideré de principio a fin — de la arquitectura a producción.",
+
+  "github.eyebrow": "Código_abierto",
+  "github.title": "En vivo desde GitHub.",
+  "github.intro": "Mis repositorios públicos más recientes, traídos en tiempo real desde <code style=\"font-family:var(--font-mono);color:#ff8a8a;font-size:.85em\">github.com/napalm23zero</code>.",
+  "github.bio": "Ingeniero de Software Senior · Arquitecto de Software",
+  "github.viewprofile": "Ver perfil completo",
+
+  "education.eyebrow": "Formación_&_idiomas",
+  "education.title": "Las bases.",
+  "education.talks": "Charlas &amp; cursos",
+
+  "certs.eyebrow": "Cursos_&_certificados",
+  "certs.title": "Siempre mejorando.",
+  "certs.intro": "Haz clic en cualquier certificado para verlo a tamaño completo.",
+  "certs.gallery": "Cursos &amp; Certificados",
+  "certs.total": "en total",
+  "certs.viewall": "Ver los",
+
+  "videos.eyebrow": "Mírame",
+  "videos.title": "Charlas &amp; builds en YouTube.",
+  "videos.intro": "Haz clic para verlo en modo cine enfocado.",
+
+  "social.eyebrow": "El_feed",
+  "social.title": "Instagram · TikTok · Twitch.",
+  "social.intro": "Embeds en vivo de mis canales.",
+  "social.ph_instagram": "Define <code>instagram:</code> en <code>content/social.&lt;lang&gt;.md</code>",
+  "social.ph_tiktok": "Define <code>tiktok:</code> en <code>content/social.&lt;lang&gt;.md</code>",
+  "social.ph_twitch": "Define <code>twitch:</code> en <code>content/social.&lt;lang&gt;.md</code>",
+
+  "blog.eyebrow": "El_blog",
+  "blog.title": "Notas desde la construcción.",
+  "blog.intro": "Ingeniería, agentes de IA y lecciones de sistemas de nivel bancario. Los posts son Markdown puro — un archivo por idioma.",
+  "blog.readfull": "Leer el blog completo",
+  "blog.backprofile": "Volver al perfil",
+  "blog.hero_title": "Notas desde la <em>construcción.</em>",
+  "blog.hero_sub": "Ingeniería, agentes de IA y lecciones difíciles de sistemas de nivel bancario. Los nuevos posts llegan aquí — guarda esta página para seguirlos.",
+  "blog.hero_tags": "Ingeniería | IA & Operaciones | Arquitectura | Notas de fundador",
+  "blog.follow": "Sígueme_",
+  "blog.list.eyebrow": "Todos_los_posts",
+  "blog.list.title": "Escritos recientes.",
+  "blog.empty": "Aún no hay posts.",
+
+  "post.readtime": "min de lectura",
+  "post.readmore": "Leer post",
+  "post.notes": "Notas",
+  "post.by": "Por"
+}

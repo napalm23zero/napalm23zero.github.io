@@ -1,6 +1,0 @@
-{
-  "eyebrow": "Selected_work",
-  "title": "Things I've built &amp; shipped.",
-  "intro": "A few systems I owned end-to-end — from architecture to production. Each card is a Markdown file in <code style=\"font-family:var(--font-mono);color:#ff8a8a;font-size:.85em\">content/portfolio</code>.",
-  "items": ["incident-ai", "hustle-tech", "compliance-apis", "cdc-etl"]
-}

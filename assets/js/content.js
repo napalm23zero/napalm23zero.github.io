@@ -1,37 +1,55 @@
 /* ============================================================
-   Content engine — renders the whole site from Markdown.
+   Content engine — renders the whole site from Markdown, in the
+   currently selected language (see i18n.js).
    ------------------------------------------------------------
-   Two content shapes:
-     • Singletons  → one .md file (front-matter + body)
-                     e.g. content/site.md, content/hero.md
-     • Collections → a folder with index.json + one .md per item
-                     index.json = { eyebrow, title, intro, items:[ids] }
-                     each item   = content/<dir>/<id>.md
-   Front-matter is plain `key: value`. Use ` | ` to write lists.
-   Bodies are standard Markdown (rendered with marked).
-   No build step — everything is fetched live from the repo.
+   • Singletons  → content/<name>.<lang>.md   (e.g. site.en.md)
+   • Collections → content/<dir>/index.json  (shared, items-only)
+                   + content/<dir>/<id>.<lang>.md per item
+   • UI labels & section headings → content/ui/<lang>.json
+   Missing <lang> files fall back to the default language.
+   Front-matter is plain `key: value`; lists use ` | `.
    ============================================================ */
 (function () {
-  /* ---------- tiny helpers ---------- */
   const $ = (id) => document.getElementById(id);
+  const T = (k) => window.I18N.t(k);
 
-  async function text(path) {
+  async function raw(path) {
     const r = await fetch(path, { cache: "no-store" });
     if (!r.ok) throw new Error("404 " + path);
     return r.text();
+  }
+  // locale-aware text: content/<lang>/<rel>.<lang>.md → fallback to default lang folder
+  async function text(rel) {
+    const lang = window.I18N.lang;
+    try {
+      return await raw(`content/${lang}/${rel}.${lang}.md`);
+    } catch (e) {
+      const d = window.I18N.default;
+      if (lang !== d) return raw(`content/${d}/${rel}.${d}.md`);
+      throw e;
+    }
   }
   async function json(path) {
     const r = await fetch(path, { cache: "no-store" });
     if (!r.ok) throw new Error("404 " + path);
     return r.json();
   }
+  // manifests live inside each language folder; fall back to the default
+  async function manifest(dir) {
+    const lang = window.I18N.lang;
+    try {
+      return await json(`content/${lang}/${dir}/index.json`);
+    } catch (e) {
+      return json(`content/${window.I18N.default}/${dir}/index.json`);
+    }
+  }
 
-  function parseFM(raw) {
-    const m = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+  function parseFM(s) {
+    const m = s.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
     const meta = {};
-    let body = raw;
+    let body = s;
     if (m) {
-      body = raw.slice(m[0].length);
+      body = s.slice(m[0].length);
       m[1].split("\n").forEach((line) => {
         const i = line.indexOf(":");
         if (i > -1) meta[line.slice(0, i).trim().toLowerCase()] = line.slice(i + 1).trim();
@@ -43,38 +61,43 @@
   const list = (v) => (v || "").split("|").map((s) => s.trim()).filter(Boolean);
   const md = (s) => (window.marked ? marked.parse(s || "") : s || "");
   const eyebrow = (s) => (s || "").replace(/_/g, '<span class="us">_</span>');
+  const tagsHTML = (v) => list(v).map((t) => `<span>${t}</span>`).join("");
 
-  async function singleton(path) {
-    return parseFM(await text(path));
+  async function singleton(name) {
+    return parseFM(await text(name));
   }
   async function collection(dir) {
-    const idx = await json(`content/${dir}/index.json`);
+    const idx = await manifest(dir);
     const items = await Promise.all(
       (idx.items || []).map(async (id) => {
-        const { meta, body } = parseFM(await text(`content/${dir}/${id}.md`));
+        const { meta, body } = parseFM(await text(`${dir}/${id}`));
         return { id, meta, body };
       })
     );
     return { ...idx, items };
   }
 
-  function headHTML(idx) {
+  // section heading driven by ui/<lang>.json keys: <p>.eyebrow / .title / .intro
+  function head(p) {
+    const e = T(`${p}.eyebrow`);
+    const t = T(`${p}.title`);
+    const i = T(`${p}.intro`);
     return `<div class="section__head reveal">
-      <div class="eyebrow">${eyebrow(idx.eyebrow)}</div>
-      ${idx.title ? `<h2>${idx.title}</h2>` : ""}
-      ${idx.intro ? `<p>${idx.intro}</p>` : ""}
+      <div class="eyebrow">${eyebrow(e)}</div>
+      ${t ? `<h2>${t}</h2>` : ""}
+      ${i ? `<p>${i}</p>` : ""}
     </div>`;
   }
+  function setHead(mountId, prefix) {
+    const el = $(mountId);
+    if (el) el.innerHTML = head(prefix);
+  }
 
-  const tags = (v) => list(v).map((t) => `<span>${t}</span>`).join("");
-
-  /* shared logo + socials markup, fed by site.md ---------------- */
+  /* ---- shared chrome bits ---- */
   let SITE = {};
   function logoHTML(sub) {
     return `<span class="logo__mark"><span class="logo__bars"><i></i><i></i><i></i></span></span>
-      <span><span class="logo__type">${SITE.wordmark || "rodrigo<span class='us'>_</span>dantas"}</span>${
-        sub ? `<small>${sub}</small>` : ""
-      }</span>`;
+      <span><span class="logo__type">${SITE.wordmark || "rodrigo<span class='us'>_</span>dantas"}</span>${sub ? `<small>${sub}</small>` : ""}</span>`;
   }
   function socialsHTML(extra) {
     const a = [];
@@ -84,74 +107,11 @@
     if (extra) a.push(extra);
     return a.join("");
   }
-
-  /* ============================================================
-     Renderers — each guarded by the presence of its mount node
-     ============================================================ */
-
-  /* ---- NAV + MOBILE MENU (site.md → nav: Label:#anchor | ...) ---- */
-  function renderNav() {
-    const navInner = $("navInner");
-    const mobile = $("mobileMenu");
-    const links = list(SITE.nav).map((pair) => {
-      const [label, href] = pair.split(":");
-      return { label: (label || "").trim(), href: (href || "").trim() };
-    });
-
-    if (navInner) {
-      navInner.innerHTML = `
-        <a class="logo" href="#top" aria-label="${SITE.name} — home">${logoHTML(SITE.brand || "Hustle Tech")}</a>
-        <nav class="nav__links">
-          ${links.map((l) => `<a href="${l.href}">${l.label}</a>`).join("")}
-          <a href="blog.html">Read my blog</a>
-        </nav>
-        <div class="nav__cta">
-          <a class="btn btn--ghost" href="${SITE.resume}" target="_blank" rel="noopener"><i class="ph ph-file-arrow-down"></i>Résumé PDF</a>
-          <a class="btn btn--primary" href="#contact"><i class="ph ph-paper-plane-tilt"></i>Contact</a>
-        </div>
-        <button class="nav__burger" id="burger" aria-label="Open menu"><i class="ph ph-list"></i></button>`;
-    }
-    if (mobile) {
-      mobile.innerHTML = `
-        <button class="mobile-menu__close" id="menuClose" aria-label="Close menu"><i class="ph ph-x"></i></button>
-        ${links.map((l) => `<a href="${l.href}">${l.label.toLowerCase()}</a>`).join("")}
-        <a href="blog.html">read my blog</a>
-        <a href="#contact">contact<span class="us">_</span></a>`;
-    }
+  function langSwitcher() {
+    return `<div class="langsw" role="group" aria-label="${T("ui.language")}">${window.I18N.langs
+      .map((l) => `<button type="button" data-lang="${l}"${l === window.I18N.lang ? ' class="active"' : ""}>${window.I18N.label[l]}</button>`)
+      .join("")}</div>`;
   }
-
-  /* ---- HERO ---- */
-  async function renderHero() {
-    const el = $("heroMount");
-    if (!el) return;
-    const { meta } = await singleton("content/hero.md");
-    const lines = list(meta.headline).map((l) => `<span class="ln"><span>${l}</span></span>`).join("");
-    el.innerHTML = `
-      <div class="hero__intro">
-        <div class="hero__hello eyebrow">${eyebrow(meta.hello)}</div>
-        <h1>${lines}</h1>
-        <p class="hero__sub">${meta.sub || ""}</p>
-        <div class="hero__cta">
-          <a class="btn btn--primary" href="#resume"><i class="ph ph-read-cv-logo"></i>Explore my résumé</a>
-          <a class="btn btn--ghost" href="#contact"><i class="ph ph-arrow-right"></i>Get in touch</a>
-        </div>
-        <div class="hero__socials">${socialsHTML(
-          SITE.youtube ? `<a href="${SITE.youtube}" target="_blank" rel="noopener" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>` : ""
-        )}</div>
-      </div>
-      <div class="hero__portrait reveal">
-        ${imgOrPh(meta.portrait, "executive portrait")}
-        <div class="hero__tag">${meta.tag || ""}</div>
-        <div class="hero__badge"><span class="dot"></span><span>${meta.badge || ""}</span></div>
-      </div>`;
-
-    const strip = $("stripMount");
-    if (strip) {
-      const items = list(meta.marquee).map((s) => `<span>${s}</span>`).join("");
-      strip.innerHTML = `<div class="strip__track">${items}${items}</div>`;
-    }
-  }
-
   function imgOrPh(src, label, extraClass) {
     const cls = extraClass ? ` ${extraClass}` : "";
     return src
@@ -159,7 +119,70 @@
       : `<div class="ph-img${cls}" data-label="${label}"></div>`;
   }
 
-  /* ---- STATS ---- */
+  /* ============================================================
+     Renderers
+     ============================================================ */
+  function renderNav() {
+    const navInner = $("navInner");
+    const mobile = $("mobileMenu");
+    const links = list(SITE.nav).map((pair) => {
+      const i = pair.indexOf(":");
+      return { label: pair.slice(0, i).trim(), href: pair.slice(i + 1).trim() };
+    });
+    if (navInner) {
+      navInner.innerHTML = `
+        <a class="logo" href="#top" aria-label="${SITE.name} — home">${logoHTML(SITE.brand || "Hustle Tech")}</a>
+        <nav class="nav__links">
+          ${links.map((l) => `<a href="${l.href}">${l.label}</a>`).join("")}
+          <a href="blog.html">${T("nav.blog")}</a>
+        </nav>
+        <div class="nav__cta">
+          ${langSwitcher()}
+          <a class="btn btn--ghost" href="${SITE.resume}" target="_blank" rel="noopener"><i class="ph ph-file-arrow-down"></i>${T("nav.resume")}</a>
+          <a class="btn btn--primary" href="#contact"><i class="ph ph-paper-plane-tilt"></i>${T("nav.contact")}</a>
+        </div>
+        <button class="nav__burger" id="burger" aria-label="Open menu"><i class="ph ph-list"></i></button>`;
+    }
+    if (mobile) {
+      mobile.innerHTML = `
+        <button class="mobile-menu__close" id="menuClose" aria-label="Close menu"><i class="ph ph-x"></i></button>
+        ${links.map((l) => `<a href="${l.href}">${l.label.toLowerCase()}</a>`).join("")}
+        <a href="blog.html">${T("nav.blog").toLowerCase()}</a>
+        <a href="#contact">${T("nav.contact").toLowerCase()}<span class="us">_</span></a>
+        ${langSwitcher()}`;
+    }
+  }
+
+  async function renderHero() {
+    const el = $("heroMount");
+    if (!el) return;
+    const { meta } = await singleton("hero");
+    const lines = list(meta.headline).map((l) => `<span class="ln"><span>${l}</span></span>`).join("");
+    el.innerHTML = `
+      <div class="hero__intro">
+        <div class="hero__hello eyebrow">${eyebrow(meta.hello)}</div>
+        <h1>${lines}</h1>
+        <p class="hero__sub">${meta.sub || ""}</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#resume"><i class="ph ph-read-cv-logo"></i>${T("hero.cta1")}</a>
+          <a class="btn btn--ghost" href="#contact"><i class="ph ph-arrow-right"></i>${T("hero.cta2")}</a>
+        </div>
+        <div class="hero__socials">${socialsHTML(
+          SITE.youtube ? `<a href="${SITE.youtube}" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>` : ""
+        )}</div>
+      </div>
+      <div class="hero__portrait reveal">
+        ${imgOrPh(meta.portrait, "executive portrait")}
+        <div class="hero__tag">${meta.tag || ""}</div>
+        <div class="hero__badge"><span class="dot"></span><span>${meta.badge || ""}</span></div>
+      </div>`;
+    const strip = $("stripMount");
+    if (strip) {
+      const items = list(meta.marquee).map((s) => `<span>${s}</span>`).join("");
+      strip.innerHTML = `<div class="strip__track">${items}${items}</div>`;
+    }
+  }
+
   async function renderStats() {
     const el = $("statsMount");
     if (!el) return;
@@ -174,11 +197,10 @@
       .join("");
   }
 
-  /* ---- ABOUT ---- */
   async function renderAbout() {
     const el = $("aboutMount");
     if (!el) return;
-    const { meta, body } = await singleton("content/about.md");
+    const { meta, body } = await singleton("about");
     el.innerHTML = `
       <div class="about__photo reveal">
         ${imgOrPh(meta.photo, "candid / working photo")}
@@ -192,7 +214,6 @@
       </div>`;
   }
 
-  /* ---- RESUME: experience / earlier / skills ---- */
   async function renderExperience() {
     const el = $("panel-exp");
     if (!el) return;
@@ -200,9 +221,8 @@
     el.innerHTML = `<div class="timeline">${items
       .map((it, i) => {
         const m = it.meta;
-        const via = m.via ? ` <span style="color:var(--fg-3);font-size:.75em">via ${m.via}</span>` : "";
-        const open = i === 0 ? " open" : "";
-        return `<details class="tl-item"${open}>
+        const via = m.via ? ` <span style="color:var(--fg-3);font-size:.75em">${T("resume.via")} ${m.via}</span>` : "";
+        return `<details class="tl-item"${i === 0 ? " open" : ""}>
           <summary>
             <div class="tl-head">
               <span class="tl-role">${m.role || ""} — <span class="tl-co">${m.company || ""}</span>${via}</span>
@@ -210,7 +230,7 @@
               <div class="tl-meta"><span class="when">${m.dates || ""}</span><span>${m.location || ""}</span><span>${m.focus || ""}</span></div>
             </div>
           </summary>
-          <div class="tl-body">${md(it.body)}<div class="tl-tags">${tags(m.tags)}</div></div>
+          <div class="tl-body">${md(it.body)}<div class="tl-tags">${tagsHTML(m.tags)}</div></div>
         </details>`;
       })
       .join("")}</div>`;
@@ -239,19 +259,18 @@
       .map(
         (it) => `<div class="skillcard">
           <h4><i class="ph ${it.meta.icon || "ph-code"}"></i>${it.meta.title || ""}</h4>
-          <div class="tags">${tags(it.meta.tags)}</div>
+          <div class="tags">${tagsHTML(it.meta.tags)}</div>
         </div>`
       )
       .join("")}</div>`;
   }
 
-  /* ---- PORTFOLIO ---- */
   async function renderPortfolio() {
     const el = $("workMount");
     if (!el) return;
-    const data = await collection("portfolio");
-    $("workHead").innerHTML = headHTML(data);
-    el.innerHTML = `<div class="work">${data.items
+    setHead("workHead", "work");
+    const { items } = await collection("portfolio");
+    el.innerHTML = `<div class="work">${items
       .map((it, i) => {
         const n = String(i + 1).padStart(2, "0");
         return `<article class="work__card reveal"${i ? ` data-d="${i}"` : ""}>
@@ -259,19 +278,18 @@
           <div class="work__body">
             <div class="work__title">${it.meta.title || ""} <i class="ph ph-arrow-up-right"></i></div>
             <p class="work__desc">${it.body}</p>
-            <div class="work__tags">${tags(it.meta.tags)}</div>
+            <div class="work__tags">${tagsHTML(it.meta.tags)}</div>
           </div>
         </article>`;
       })
       .join("")}</div>`;
   }
 
-  /* ---- EDUCATION + TALKS + LANGUAGES ---- */
   async function renderEducation() {
     const el = $("eduMount");
     if (!el) return;
+    setHead("educationHead", "education");
     const [edu, talks, langs] = await Promise.all([collection("education"), collection("talks"), collection("languages")]);
-
     const eduCards = edu.items
       .map(
         (it) => `<div class="edu__card">
@@ -282,13 +300,9 @@
         </div>`
       )
       .join("");
-
     const talkRows = talks.items
-      .map(
-        (it) => `<div class="talk"><i class="ph ph-microphone-stage"></i><div><b>${it.meta.title || ""}</b><small>${it.meta.meta || ""}</small></div></div>`
-      )
+      .map((it) => `<div class="talk"><i class="ph ph-microphone-stage"></i><div><b>${it.meta.title || ""}</b><small>${it.meta.meta || ""}</small></div></div>`)
       .join("");
-
     const langRows = langs.items
       .map(
         (it) => `<div class="lang__row">
@@ -298,27 +312,24 @@
         </div>`
       )
       .join("");
-
     el.innerHTML = `
       <div class="reveal">
         ${eduCards}
         <div class="edu__card" style="margin-top:24px">
-          <h4 style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:6px">Talks &amp; courses</h4>
+          <h4 style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:6px">${T("education.talks")}</h4>
           ${talkRows}
         </div>
       </div>
       <div class="reveal" data-d="1"><div class="lang">${langRows}</div></div>`;
   }
 
-  /* ---- CERTIFICATES (preview row + modal gallery) ---- */
   async function renderCerts() {
     const el = $("certsGrid");
     if (!el) return;
-    const data = await collection("certificates");
-    $("certsHead").innerHTML = headHTML(data);
-    const CERTS = data.items.map((it) => it.meta);
+    setHead("certsHead", "certs");
+    const { items } = await collection("certificates");
+    const CERTS = items.map((it) => it.meta);
     const PREVIEW = 3;
-
     const cardHTML = (c) => `
       <div class="cert__media">
         ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : `<div class="ph-img" data-label="certificate"></div>`}
@@ -329,21 +340,18 @@
         <div class="cert__title">${c.title || ""}</div>
         <div class="cert__date">${c.date || ""}</div>
       </div>`;
-
     const open = (c) => {
       if (!window.openModal) return;
       if (c.image) window.openModal({ imgSrc: c.image, isImage: true, title: c.title, sub: `${c.issuer} · ${c.date}` });
       else window.openModal({ html: `<div class="ph-img" data-label="certificate scan goes here" style="position:absolute;inset:0"></div>`, title: c.title, sub: `${c.issuer} · ${c.date}` });
     };
-
     const gallery = () => {
-      const items = CERTS.map((c, i) => `<div class="cert" data-ci="${i}">${cardHTML(c)}</div>`).join("");
+      const cells = CERTS.map((c, i) => `<div class="cert" data-ci="${i}">${cardHTML(c)}</div>`).join("");
       window.openModal({
-        panel: `<div class="modal__panel-head"><i class="ph ph-seal-check"></i><h4>Courses &amp; Certificates</h4><small>${CERTS.length} total</small></div><div class="cert-gallery">${items}</div>`,
+        panel: `<div class="modal__panel-head"><i class="ph ph-seal-check"></i><h4>${T("certs.gallery")}</h4><small>${CERTS.length} ${T("certs.total")}</small></div><div class="cert-gallery">${cells}</div>`,
       });
       document.querySelectorAll("#modalFrame .cert-gallery .cert").forEach((node) => node.addEventListener("click", () => open(CERTS[+node.dataset.ci])));
     };
-
     el.innerHTML = "";
     CERTS.slice(0, PREVIEW).forEach((c, i) => {
       const node = document.createElement("div");
@@ -357,19 +365,19 @@
       const more = document.createElement("div");
       more.className = "cert-more reveal";
       more.dataset.d = "3";
-      more.innerHTML = `<div class="cert-more__inner"><b>+${CERTS.length - PREVIEW}</b><span>View all ${CERTS.length}</span></div>`;
+      more.innerHTML = `<div class="cert-more__inner"><b>+${CERTS.length - PREVIEW}</b><span>${T("certs.viewall")} ${CERTS.length}</span></div>`;
       more.addEventListener("click", gallery);
       el.appendChild(more);
     }
   }
 
-  /* ---- YOUTUBE VIDEOS (theater modal) ---- */
   async function renderVideos() {
     const el = $("ytGrid");
     if (!el) return;
-    const data = await collection("videos");
-    $("videosHead").innerHTML = headHTML(data);
-    data.items.forEach((it, i) => {
+    setHead("videosHead", "videos");
+    const { items } = await collection("videos");
+    el.innerHTML = "";
+    items.forEach((it, i) => {
       const v = it.meta;
       const card = document.createElement("div");
       card.className = "yt__card reveal";
@@ -397,29 +405,24 @@
     });
   }
 
-  /* ---- SOCIAL EMBEDS ---- */
   async function renderSocial() {
     const el = $("socialMount");
     if (!el) return;
-    const { meta } = await singleton("content/social.md");
+    setHead("socialHead", "social");
+    const { meta } = await singleton("social");
     const host = location.hostname || "localhost";
-
     const ph = (icon, lines) => `<div class="social__ph"><i class="ph ${icon}"></i><p>${lines}</p></div>`;
-
-    let ig;
-    if (meta.instagram) ig = `<blockquote class="instagram-media" data-instgrm-permalink="${meta.instagram}" data-instgrm-version="14" style="width:100%;min-width:0;margin:0;background:#000"></blockquote>`;
-    else ig = ph("ph-instagram-logo", "Set <code>instagram:</code> in <code>content/social.md</code>");
-
+    let ig = meta.instagram
+      ? `<blockquote class="instagram-media" data-instgrm-permalink="${meta.instagram}" data-instgrm-version="14" style="width:100%;min-width:0;margin:0;background:#000"></blockquote>`
+      : ph("ph-instagram-logo", T("social.ph_instagram"));
     let tt;
     if (meta.tiktok) {
       const id = (meta.tiktok.match(/video\/(\d+)/) || [])[1] || "";
       tt = `<blockquote class="tiktok-embed" cite="${meta.tiktok}" data-video-id="${id}" style="margin:0;min-width:0"><section></section></blockquote>`;
-    } else tt = ph("ph-tiktok-logo", "Set <code>tiktok:</code> in <code>content/social.md</code>");
-
-    let tw;
-    if (meta.twitch) tw = `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(meta.twitch)}&parent=${host}&muted=true&autoplay=false" height="420" width="100%" allowfullscreen></iframe>`;
-    else tw = ph("ph-twitch-logo", "Set <code>twitch:</code> in <code>content/social.md</code>");
-
+    } else tt = ph("ph-tiktok-logo", T("social.ph_tiktok"));
+    let tw = meta.twitch
+      ? `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(meta.twitch)}&parent=${host}&muted=true&autoplay=false" height="420" width="100%" allowfullscreen></iframe>`
+      : ph("ph-twitch-logo", T("social.ph_twitch"));
     el.innerHTML = `
       <div class="social__col ig">
         <div class="social__bar"><i class="ph-fill ph-instagram-logo"></i><b>Instagram</b><a href="${meta.instagram_url || "https://instagram.com/"}" target="_blank" rel="noopener">${meta.instagram_handle || "@rodrigo"} <i class="ph ph-arrow-up-right"></i></a></div>
@@ -433,7 +436,6 @@
         <div class="social__bar"><i class="ph-fill ph-twitch-logo"></i><b>Twitch</b><a href="${meta.twitch_url || "https://twitch.tv/"}" target="_blank" rel="noopener">${meta.twitch_handle || "/rodrigo"} <i class="ph ph-arrow-up-right"></i></a></div>
         <div class="social__embed">${tw}</div>
       </div>`;
-
     if (meta.instagram) {
       const s = document.createElement("script");
       s.src = "https://www.instagram.com/embed.js";
@@ -449,13 +451,20 @@
     }
   }
 
-  /* ---- CONTACT + FOOTER (from site.md) ---- */
+  function renderGithubHead() {
+    setHead("githubHead", "github");
+    const u = $("ghUser");
+    if (u) u.innerHTML = `<b>${SITE.github_user || "napalm23zero"}</b><small>${T("github.bio")}</small>`;
+    const vp = $("ghViewProfile");
+    if (vp) vp.innerHTML = `<i class="ph ph-github-logo"></i>${T("github.viewprofile")}`;
+  }
+
   function renderContact() {
     const el = $("contactMount");
     if (el) {
       el.innerHTML = `
         <div class="eyebrow">${eyebrow(SITE.contact_eyebrow || "Let's_talk")}</div>
-        <h2 style="margin-top:18px">${SITE.contact_title || "Own a domain. Build something that lasts."}</h2>
+        <h2 style="margin-top:18px">${SITE.contact_title || ""}</h2>
         <p>${SITE.contact_sub || ""}</p>
         <div class="contact__actions">
           <a class="btn btn--primary" href="mailto:${SITE.email}"><i class="ph ph-envelope-simple"></i>${SITE.email}</a>
@@ -475,13 +484,28 @@
     }
   }
 
+  function renderResumeChrome() {
+    setHead("resumeHead", "resume");
+    setHead("blogHead", "blog");
+    const tb = $("resumeTabs");
+    if (tb) {
+      tb.querySelector('[data-tab="exp"]').textContent = T("resume.tab_exp");
+      tb.querySelector('[data-tab="earlier"]').textContent = T("resume.tab_earlier");
+      tb.querySelector('[data-tab="skills"]').textContent = T("resume.tab_skills");
+    }
+    const dl = $("resumeDownload");
+    if (dl) dl.innerHTML = `<i class="ph ph-download-simple"></i>${T("resume.download")}`;
+    const rf = $("blogReadFull");
+    if (rf) rf.innerHTML = `<i class="ph ph-newspaper-clipping"></i>${T("blog.readfull")}`;
+  }
+
   /* ---- BLOG chrome (blog.html) ---- */
   function renderBlogChrome() {
     const top = $("blogTopMount");
     if (top) {
       top.innerHTML = `
         <a class="logo" href="index.html" aria-label="${SITE.name} — home">${logoHTML(SITE.blog_label || "The Blog")}</a>
-        <a class="btn btn--ghost" href="index.html"><i class="ph ph-arrow-left"></i>Back to profile</a>`;
+        <div class="blogtop__right">${langSwitcher()}<a class="btn btn--ghost" href="index.html"><i class="ph ph-arrow-left"></i>${T("blog.backprofile")}</a></div>`;
     }
     const id = $("blogId");
     if (id) {
@@ -489,28 +513,39 @@
         <img class="bloghero__avatar" src="${SITE.avatar || ""}" alt="${SITE.name}" loading="lazy" />
         <div class="bloghero__who"><b>${SITE.name || ""}</b><span>${SITE.blog_tagline || SITE.role || ""}</span></div>`;
     }
+    const h1 = $("blogHeroTitle");
+    if (h1) h1.innerHTML = T("blog.hero_title");
+    const sub = $("blogHeroSub");
+    if (sub) sub.innerHTML = T("blog.hero_sub");
+    const tags = $("blogHeroTags");
+    if (tags) tags.innerHTML = list(T("blog.hero_tags")).map((t) => `<span>${t}</span>`).join("");
     const follow = $("blogFollow");
-    if (follow) {
-      follow.innerHTML = `<span class="lbl">Follow_</span>${socialsHTML(
-        SITE.youtube ? `<a href="${SITE.youtube}" target="_blank" rel="noopener" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>` : ""
-      )}`;
-    }
+    if (follow) follow.innerHTML = `<span class="lbl">${T("blog.follow")}</span>${socialsHTML(SITE.youtube ? `<a href="index.html#videos" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>` : "")}`;
+    setHead("blogListHead", "blog.list");
+  }
+
+  function wireLangButtons() {
+    document.querySelectorAll(".langsw button").forEach((b) => {
+      b.addEventListener("click", () => window.I18N.setLang(b.dataset.lang));
+    });
   }
 
   /* ============================================================
-     Boot
+     Render pipeline (re-runnable on language change)
      ============================================================ */
-  async function boot() {
+  window.__renderAll = async function () {
+    await window.I18N.loadUI();
     try {
-      const s = await singleton("content/site.md");
-      SITE = s.meta;
+      SITE = (await singleton("site")).meta;
     } catch (e) {
-      console.error("Failed to load content/site.md", e);
+      console.error("content/site.*.md failed", e);
+      SITE = {};
     }
-
-    // chrome first (sync), then content sections (parallel)
+    window.SITE_NAME = SITE.name || "Rodrigo Dantas";
     renderNav();
     renderContact();
+    renderResumeChrome();
+    renderGithubHead();
     renderBlogChrome();
 
     await Promise.allSettled([
@@ -527,10 +562,13 @@
       renderSocial(),
     ]);
 
-    // re-wire interactions + reveals now that the DOM exists
-    if (window.__wireSite) window.__wireSite();
-    if (window.__observeReveals) window.__observeReveals();
-  }
+    if (window.__renderBlog) await window.__renderBlog();
 
-  boot();
+    if (window.__wireSite) window.__wireSite();
+    wireLangButtons();
+    if (window.__observeReveals) window.__observeReveals();
+  };
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", window.__renderAll);
+  else window.__renderAll();
 })();

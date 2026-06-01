@@ -1,6 +1,0 @@
-{
-  "eyebrow": "Watch_me",
-  "title": "Talks &amp; builds on YouTube.",
-  "intro": "Click to play in a focused theater view. Each video is a Markdown file in <code style=\"font-family:var(--font-mono);color:#ff8a8a;font-size:.85em\">content/videos</code>.",
-  "items": ["incident-agent", "api-contracts", "mongodb", "monolith-microservices", "llm-code-review", "late-night-refactor"]
-}

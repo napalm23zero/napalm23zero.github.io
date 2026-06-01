@@ -1,0 +1,69 @@
+{
+  "ui.language": "Language",
+
+  "nav.blog": "Read my blog",
+  "nav.resume": "Résumé PDF",
+  "nav.contact": "Contact",
+
+  "hero.cta1": "Explore my résumé",
+  "hero.cta2": "Get in touch",
+
+  "resume.eyebrow": "The_résumé",
+  "resume.title": "Ten years, condensed. <span class=\"accent\">Click to dig in.</span>",
+  "resume.intro": "Experience, earlier roles and the full stack — organized so you can scan or go deep. Everything here mirrors my live CV.",
+  "resume.via": "via",
+  "resume.tab_exp": "Experience",
+  "resume.tab_earlier": "Earlier roles",
+  "resume.tab_skills": "Skills",
+  "resume.download": "Download full PDF",
+
+  "work.eyebrow": "Selected_work",
+  "work.title": "Things I've built &amp; shipped.",
+  "work.intro": "A few systems I owned end-to-end — from architecture to production.",
+
+  "github.eyebrow": "Open_source",
+  "github.title": "Live from GitHub.",
+  "github.intro": "My latest public repositories, pulled straight from <code style=\"font-family:var(--font-mono);color:#ff8a8a;font-size:.85em\">github.com/napalm23zero</code> in real time.",
+  "github.bio": "Senior Software Engineer · Software Architect",
+  "github.viewprofile": "View full profile",
+
+  "education.eyebrow": "Education_&_languages",
+  "education.title": "The foundations.",
+  "education.talks": "Talks &amp; courses",
+
+  "certs.eyebrow": "Courses_&_certificates",
+  "certs.title": "Always leveling up.",
+  "certs.intro": "Click any certificate to view it full-size.",
+  "certs.gallery": "Courses &amp; Certificates",
+  "certs.total": "total",
+  "certs.viewall": "View all",
+
+  "videos.eyebrow": "Watch_me",
+  "videos.title": "Talks &amp; builds on YouTube.",
+  "videos.intro": "Click to play in a focused theater view.",
+
+  "social.eyebrow": "The_feed",
+  "social.title": "Instagram · TikTok · Twitch.",
+  "social.intro": "Live embeds from my channels.",
+  "social.ph_instagram": "Set <code>instagram:</code> in <code>content/social.&lt;lang&gt;.md</code>",
+  "social.ph_tiktok": "Set <code>tiktok:</code> in <code>content/social.&lt;lang&gt;.md</code>",
+  "social.ph_twitch": "Set <code>twitch:</code> in <code>content/social.&lt;lang&gt;.md</code>",
+
+  "blog.eyebrow": "The_blog",
+  "blog.title": "Notes from the build.",
+  "blog.intro": "Engineering, AI agents and lessons from banking-grade systems. Posts are plain Markdown — one file per language.",
+  "blog.readfull": "Read the full blog",
+  "blog.backprofile": "Back to profile",
+  "blog.hero_title": "Notes from <em>the build.</em>",
+  "blog.hero_sub": "Engineering, AI agents and hard-won lessons from banking-grade systems. New posts land here — bookmark this page to follow along.",
+  "blog.hero_tags": "Engineering | AI & Operations | Architecture | Founder notes",
+  "blog.follow": "Follow_",
+  "blog.list.eyebrow": "All_posts",
+  "blog.list.title": "Latest writing.",
+  "blog.empty": "No posts yet.",
+
+  "post.readtime": "min read",
+  "post.readmore": "Read post",
+  "post.notes": "Notes",
+  "post.by": "By"
+}
