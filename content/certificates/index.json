@@ -1,0 +1,6 @@
+{
+  "eyebrow": "Courses_&_certificates",
+  "title": "Always leveling up.",
+  "intro": "Click any certificate to view it full-size. Drop real scans in <code style=\"font-family:var(--font-mono);color:#ff8a8a;font-size:.85em\">assets/certs/</code> and set <code style=\"font-family:var(--font-mono);color:#ff8a8a;font-size:.85em\">image:</code> in each Markdown file.",
+  "items": ["oracle-java", "gcp-architect", "aws-developer", "scrum-master", "mongodb-dev", "spring-pro", "terraform", "restful-node"]
+}

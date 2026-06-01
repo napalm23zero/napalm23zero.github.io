@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Blog — Rodrigo Dantas</title>
+<meta name="description" content="Notes from the build: engineering, AI agents and lessons from banking-grade systems. By Rodrigo Dantas." />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="stylesheet" href="assets/css/components.css" />
+<link rel="stylesheet" href="assets/css/additions.css" />
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- ===== TOP BAR (content/site.md) ===== -->
+<header class="blogtop" id="nav">
+  <div class="wrap blogtop__bar" id="blogTopMount"></div>
+</header>
+
+<main id="top">
+
+  <!-- ===== BLOG HERO ===== -->
+  <section class="bloghero">
+    <div class="wrap">
+      <div class="bloghero__id reveal" id="blogId"></div>
+      <h1 class="reveal" data-d="1">Notes from <em>the build.</em></h1>
+      <p class="bloghero__sub reveal" data-d="2">Engineering, AI agents and hard-won lessons from banking-grade systems. New posts land here — bookmark this page to follow along.</p>
+      <div class="bloghero__tags reveal" data-d="3">
+        <span>Engineering</span><span>AI &amp; Operations</span><span>Architecture</span><span>Founder notes</span>
+      </div>
+      <div class="bloghero__follow reveal" data-d="3" id="blogFollow"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== POSTS (content/posts) ===== -->
+  <section class="section" id="blog">
+    <div class="wrap">
+      <div class="section__head reveal" style="margin-bottom:28px">
+        <div class="eyebrow">All<span class="us">_</span>posts</div>
+        <h2>Latest writing.</h2>
+      </div>
+      <div id="blogList" data-layout="grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER (content/site.md) ===== -->
+  <footer class="footer">
+    <div class="wrap footer__grid" id="footerMount"></div>
+  </footer>
+
+</main>
+
+<!-- ===== ARTICLE READER ===== -->
+<div class="reader" id="reader">
+  <div class="reader__top">
+    <div class="wrap">
+      <a class="reader__back" id="readerBack" href="#blog"><i class="ph ph-arrow-left"></i>Back to blog</a>
+      <a class="logo" href="index.html"><span class="logo__type">rodrigo<span class="us">_</span>dantas</span></a>
+    </div>
+  </div>
+  <article class="reader__doc" id="readerDoc"></article>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/blog.js"></script>
+</body>
+</html>

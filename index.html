@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rodrigo Dantas — Senior Software Engineer &amp; Architect</title>
+<meta name="description" content="Senior Software Engineer & Software Architect. 10+ years building Java/Python/Node/React systems for banking and fintech across LATAM and the US. Founder of Hustle Tech." />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="stylesheet" href="assets/css/components.css" />
+<link rel="stylesheet" href="assets/css/additions.css" />
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- ===== NAV (rendered from content/site.md) ===== -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner" id="navInner"></div>
+</header>
+<div class="mobile-menu" id="mobileMenu"></div>
+
+<main id="top">
+
+  <!-- ===== HERO (content/hero.md) ===== -->
+  <section class="hero">
+    <div class="wrap hero__grid" id="heroMount"></div>
+  </section>
+
+  <!-- ===== MARQUEE STRIP (content/hero.md → marquee) ===== -->
+  <div class="strip" id="stripMount"></div>
+
+  <!-- ===== STATS (content/stats) ===== -->
+  <section class="section section--tight">
+    <div class="wrap stats" id="statsMount"></div>
+  </section>
+
+  <!-- ===== ABOUT (content/about.md) ===== -->
+  <section class="section" id="about">
+    <div class="wrap about__grid" id="aboutMount"></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== RESUME (content/experience · earlier · skills) ===== -->
+  <section class="section" id="resume">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <div class="eyebrow">The<span class="us">_</span>résumé</div>
+        <h2>Ten years, condensed. <span class="accent">Click to dig in.</span></h2>
+        <p>Experience, earlier roles and the full stack — organized so you can scan or go deep. Everything here mirrors my live CV.</p>
+      </div>
+
+      <div class="resume__bar reveal">
+        <div class="tabs" id="resumeTabs">
+          <button class="active" data-tab="exp">Experience</button>
+          <button data-tab="earlier">Earlier roles</button>
+          <button data-tab="skills">Skills</button>
+        </div>
+        <a class="btn btn--ghost" href="assets/files/resume.pdf" target="_blank" rel="noopener"><i class="ph ph-download-simple"></i>Download full PDF</a>
+      </div>
+
+      <div class="tabpanel active" data-panel="exp" id="panel-exp"></div>
+      <div class="tabpanel" data-panel="earlier" id="panel-earlier"></div>
+      <div class="tabpanel" data-panel="skills" id="panel-skills"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== PORTFOLIO (content/portfolio) ===== -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div id="workHead"></div>
+      <div id="workMount"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== GITHUB (live) ===== -->
+  <section class="section" id="github">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <div class="eyebrow">Open<span class="us">_</span>source</div>
+        <h2>Live from GitHub.</h2>
+        <p>My latest public repositories, pulled straight from <code style="font-family:var(--font-mono);color:#ff8a8a;font-size:.85em">github.com/napalm23zero</code> in real time.</p>
+      </div>
+      <div class="gh__head reveal">
+        <div class="gh__user">
+          <img class="gh__avatar" src="https://github.com/napalm23zero.png" alt="" loading="lazy" />
+          <div><b>napalm23zero</b><small>Senior Software Engineer · Software Architect</small></div>
+        </div>
+        <a class="btn btn--ghost" href="https://github.com/napalm23zero" target="_blank" rel="noopener"><i class="ph ph-github-logo"></i>View full profile</a>
+      </div>
+      <div class="repos" id="repos" data-user="napalm23zero"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== EDUCATION / LANGUAGES (content/education · talks · languages) ===== -->
+  <section class="section" id="education">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <div class="eyebrow">Education<span class="us">_</span>&amp;_languages</div>
+        <h2>The foundations.</h2>
+      </div>
+      <div class="edu" id="eduMount"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== CERTIFICATES (content/certificates) ===== -->
+  <section class="section" id="certs">
+    <div class="wrap">
+      <div id="certsHead"></div>
+      <div class="certs" id="certsGrid"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== YOUTUBE VIDEOS (content/videos) ===== -->
+  <section class="section" id="videos">
+    <div class="wrap">
+      <div id="videosHead"></div>
+      <div class="yt" id="ytGrid"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== SOCIAL EMBEDS (content/social.md) ===== -->
+  <section class="section" id="social">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <div class="eyebrow">The<span class="us">_</span>feed</div>
+        <h2>Instagram · TikTok · Twitch.</h2>
+        <p>Live embeds from my channels. Set the handles/URLs in <code style="font-family:var(--font-mono);color:#ff8a8a;font-size:.85em">content/social.md</code>.</p>
+      </div>
+      <div class="social reveal" id="socialMount"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== BLOG (content/posts) ===== -->
+  <section class="section" id="blog">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <div class="eyebrow">The<span class="us">_</span>blog</div>
+        <h2>Notes from the build.</h2>
+        <p>Engineering, AI agents and lessons from banking-grade systems. Posts are plain Markdown — drop a <code style="font-family:var(--font-mono);color:#ff8a8a;font-size:.85em">.md</code> in <code style="font-family:var(--font-mono);color:#ff8a8a;font-size:.85em">content/posts</code> and list its id in <code style="font-family:var(--font-mono);color:#ff8a8a;font-size:.85em">index.json</code>.</p>
+      </div>
+      <div id="blogList"></div>
+      <div class="blog2__foot" style="display:flex;justify-content:center"><a class="btn btn--primary" href="blog.html"><i class="ph ph-newspaper-clipping"></i>Read the full blog</a></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT (content/site.md) ===== -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact__card reveal" id="contactMount"></div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER (content/site.md) ===== -->
+  <footer class="footer">
+    <div class="wrap footer__grid" id="footerMount"></div>
+  </footer>
+
+</main>
+
+<!-- ===== ARTICLE READER ===== -->
+<div class="reader" id="reader">
+  <div class="reader__top">
+    <div class="wrap">
+      <a class="reader__back" id="readerBack" href="#blog"><i class="ph ph-arrow-left"></i>Back to blog</a>
+      <a class="logo" href="#top"><span class="logo__type">rodrigo<span class="us">_</span>dantas</span></a>
+    </div>
+  </div>
+  <article class="reader__doc" id="readerDoc"></article>
+</div>
+
+<!-- ===== MEDIA MODAL (video / certificate) ===== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="modal__scrim" data-close></div>
+  <div class="modal__stage">
+    <button class="modal__close" id="modalClose" aria-label="Close"><i class="ph ph-x"></i></button>
+    <div class="modal__frame" id="modalFrame"></div>
+    <div class="modal__cap" id="modalCap"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/blog.js"></script>
+</body>
+</html>
