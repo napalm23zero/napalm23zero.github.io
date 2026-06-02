@@ -20,6 +20,6 @@ avatar: https://github.com/napalm23zero.png
 quote: "No sigas tendencias. Créalas."
 contact_eyebrow: Hablemos_
 contact_title: Pasa a saludar.
-contact_sub: Siempre con ganas de charlar, sobre tecnología, proyectos, jiu-jitsu o nada en particular. Elige el canal que te quede más fácil abajo y escríbeme.
+contact_sub: Siempre con ganas de charlar, sobre tecnología, proyectos, videojuegos o nada en particular. Elige el canal que te quede más fácil abajo y escríbeme.
 ---
 Identidad global del sitio (versión ES).

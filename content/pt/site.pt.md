@@ -20,6 +20,6 @@ avatar: https://github.com/napalm23zero.png
 quote: "Não siga tendências. Crie-as."
 contact_eyebrow: Bora_conversar
 contact_title: Vem trocar uma ideia.
-contact_sub: Sempre a fim de trocar uma ideia, sobre tecnologia, projetos, jiu-jitsu ou nada em específico. Escolhe o canal mais fácil aí embaixo e me chama.
+contact_sub: Sempre a fim de trocar uma ideia, sobre tecnologia, projetos, videogames ou nada em específico. Escolhe o canal mais fácil aí embaixo e me chama.
 ---
 Identidade global do site (versão PT).

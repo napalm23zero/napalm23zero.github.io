@@ -20,7 +20,7 @@ avatar: https://github.com/napalm23zero.png
 quote: "Don't follow trends. Create them."
 contact_eyebrow: Say_hi
 contact_title: Come say hi.
-contact_sub: Always happy to talk, about tech, side projects, jiu-jitsu, or nothing in particular. Pick whatever's easiest below and reach out.
+contact_sub: Always happy to talk, about tech, side projects, video games, or nothing in particular. Pick whatever's easiest below and reach out.
 ---
 Global site identity. Everything above feeds the nav, hero socials, contact card,
 footer and the blog header. Edit a value and it updates everywhere it appears.

@@ -3,7 +3,7 @@ eyebrow: Sobre_mim
 photo: assets/img/rodrigo-about.jpg
 floatcap: <b>{{years_dev}}+ anos</b> em produção
 lead: Engenheiro sênior com {{years_dev}}+ anos construindo software e {{years_tech}}+ na tecnologia no geral, em domínios bem diferentes: finanças, fiscal, varejo, viagens, telecom. Construo o tipo de sistema de que pessoas e dinheiro dependem em silêncio.
-chips: Entrega multi-domínio | Sistemas Distribuídos | Agentes LLM | Mentoria | Contratos de API | Jiu-jitsu & calistenia
+chips: Entrega multi-domínio | Sistemas Distribuídos | Agentes LLM | Mentoria | Contratos de API | Videogames
 ---
 Passei {{years_tech}}+ anos na área de tecnologia, {{years_dev}} deles construindo software, a maior parte em Java, Python, Node e React. O que eu mais amo é a variedade: sistemas fiscais numa semana, sensores médicos na outra. Domínio diferente, mesmo ofício, e essa troca é a melhor parte do trabalho.
 
