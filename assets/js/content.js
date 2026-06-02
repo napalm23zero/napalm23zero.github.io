@@ -174,6 +174,10 @@
       .map((l) => `<button type="button" data-lang="${l}"${l === window.I18N.lang ? ' class="active"' : ""}>${FLAG[l] ? `<img class="flag" src="assets/img/flags/${FLAG[l]}.svg" alt="" width="18" height="12" loading="lazy" />` : ""}${window.I18N.label[l]}</button>`)
       .join("")}</div>`;
   }
+  function themeToggleHTML() {
+    const light = document.documentElement.getAttribute("data-theme") === "light";
+    return `<button type="button" class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme"><i class="ph ${light ? "ph-moon" : "ph-sun"}"></i></button>`;
+  }
   function imgOrPh(src, label, extraClass) {
     const cls = extraClass ? ` ${extraClass}` : "";
     return src
@@ -199,6 +203,7 @@
           <a href="blog.html">Blog</a>
         </nav>
         <div class="nav__cta">
+          ${themeToggleHTML()}
           ${langSwitcher()}
           <a class="btn btn--ghost btn--icon" href="${SITE.resume}" target="_blank" rel="noopener" aria-label="${T("nav.resume")}" title="${T("nav.resume")}"><i class="ph ph-file-arrow-down"></i></a>
           <a class="btn btn--primary" href="#contact"><i class="ph ph-paper-plane-tilt"></i>${T("nav.contact")}</a>
@@ -212,7 +217,7 @@
         <a href="blog.html">${T("nav.blog").toLowerCase()}</a>
         <a href="${SITE.resume}" target="_blank" rel="noopener">${T("nav.resume").toLowerCase()}</a>
         <a href="#contact">${T("nav.contact").toLowerCase()}<span class="us">_</span></a>
-        ${langSwitcher()}`;
+        ${langSwitcher()}${themeToggleHTML()}`;
     }
   }
 
@@ -597,7 +602,7 @@
     if (top) {
       top.innerHTML = `
         <a class="logo" href="index.html" aria-label="${SITE.name} — home">${logoHTML(SITE.blog_label || "The Blog")}</a>
-        <div class="blogtop__right">${langSwitcher()}<a class="btn btn--ghost" href="index.html"><i class="ph ph-arrow-left"></i>${T("blog.backprofile")}</a></div>`;
+        <div class="blogtop__right">${themeToggleHTML()}${langSwitcher()}<a class="btn btn--ghost" href="index.html"><i class="ph ph-arrow-left"></i>${T("blog.backprofile")}</a></div>`;
     }
     const id = $("blogId");
     if (id) {
@@ -619,6 +624,22 @@
   function wireLangButtons() {
     document.querySelectorAll(".langsw button").forEach((b) => {
       b.addEventListener("click", () => window.I18N.setLang(b.dataset.lang));
+    });
+  }
+
+  function applyTheme(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    try { localStorage.setItem("theme", t); } catch (e) {}
+    document.querySelectorAll(".theme-toggle i").forEach((i) => {
+      i.className = "ph " + (t === "light" ? "ph-moon" : "ph-sun");
+    });
+  }
+  function wireTheme() {
+    document.querySelectorAll(".theme-toggle").forEach((b) => {
+      b.addEventListener("click", () => {
+        const light = document.documentElement.getAttribute("data-theme") === "light";
+        applyTheme(light ? "dark" : "light");
+      });
     });
   }
 
@@ -680,6 +701,7 @@
 
     if (window.__wireSite) window.__wireSite();
     wireLangButtons();
+    wireTheme();
     introOnce();
     if (window.__observeReveals) window.__observeReveals();
   };
