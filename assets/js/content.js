@@ -508,41 +508,23 @@
     if (!el) return;
     setHead("socialHead", "social");
     const { meta } = await singleton("social");
-    const host = location.hostname || "localhost";
-    const ph = (icon, lines) => `<div class="social__ph"><i class="ph ${icon}"></i><p>${lines}</p></div>`;
-    const dark = currentTheme() !== "light";
-    const ig = meta.instagram
-      ? `<blockquote class="instagram-media" data-instgrm-permalink="${meta.instagram}" data-instgrm-version="14" style="width:100%;min-width:0;margin:0;background:#000"></blockquote>`
-      : ph("ph-instagram-logo", T("ui.soon"));
-    let tt;
-    if (meta.tiktok) {
-      const id = (meta.tiktok.match(/video\/(\d+)/) || [])[1] || "";
-      tt = `<blockquote class="tiktok-embed" cite="${meta.tiktok}" data-video-id="${id}" style="margin:0;min-width:0"><section></section></blockquote>`;
-    } else tt = ph("ph-tiktok-logo", T("ui.soon"));
-    const xt = meta.twitter
-      ? `<a class="twitter-timeline" data-theme="${dark ? "dark" : "light"}" data-chrome="noheader nofooter transparent" data-tweet-limit="3" href="https://twitter.com/${meta.twitter}?ref_src=twsrc%5Etfw">@${meta.twitter}</a>`
-      : ph("ph-x-logo", T("ui.soon"));
-    const tw = meta.twitch
-      ? `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(meta.twitch)}&parent=${host}&muted=true&autoplay=false" height="340" width="100%" allowfullscreen></iframe>`
-      : ph("ph-twitch-logo", T("ui.soon"));
-    const yt = meta.youtube_channel
-      ? `<iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UU${meta.youtube_channel.replace(/^UC/, "")}&rel=0" width="100%" height="340" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-      : ph("ph-youtube-logo", T("ui.soon"));
-    const col = (cls, icon, name, url, handle, fb, embed) =>
-      `<div class="social__col ${cls}">
-        <div class="social__bar"><i class="ph-fill ${icon}"></i><b>${name}</b><a href="${url || fb}" target="_blank" rel="noopener">${handle} <i class="ph ph-arrow-up-right"></i></a></div>
-        <div class="social__embed">${embed}</div>
-      </div>`;
+    // Uniform link cards instead of third-party embeds: they render identically
+    // every time and never break, regardless of IG/TikTok/X widget flakiness.
+    const card = (cls, icon, name, handle, href) =>
+      href
+        ? `<a class="social__card ${cls}" href="${href}" target="_blank" rel="noopener" aria-label="${name} — ${handle}">
+        <i class="ph ph-arrow-up-right social__go"></i>
+        <i class="ph-fill ${icon} social__ico"></i>
+        <div class="social__plat">${name}</div>
+        <div class="social__handle">${handle}</div>
+      </a>`
+        : "";
     el.innerHTML =
-      col("ig", "ph-instagram-logo", "Instagram", meta.instagram_url, meta.instagram_handle || "@napalm23zero", "https://instagram.com/", ig) +
-      col("tt", "ph-tiktok-logo", "TikTok", meta.tiktok_url, meta.tiktok_handle || "@napalm23zero", "https://tiktok.com/", tt) +
-      col("xt", "ph-x-logo", "X", meta.twitter_url, meta.twitter_handle || "@napalm23zero", "https://x.com/", xt) +
-      col("tw", "ph-twitch-logo", "Twitch", meta.twitch_url, meta.twitch_handle || "/napalm23zero", "https://twitch.tv/", tw) +
-      col("yt", "ph-youtube-logo", "YouTube", meta.youtube_url, meta.youtube_handle || "@napalm23zero", "https://youtube.com/", yt);
-    const loadScript = (src, cb) => { const s = document.createElement("script"); s.src = src; s.async = true; if (cb) s.onload = cb; document.body.appendChild(s); };
-    if (meta.instagram) loadScript("https://www.instagram.com/embed.js", () => window.instgrm && window.instgrm.Embeds.process());
-    if (meta.tiktok) loadScript("https://www.tiktok.com/embed.js");
-    if (meta.twitter) loadScript("https://platform.twitter.com/widgets.js", () => window.twttr && window.twttr.widgets && window.twttr.widgets.load());
+      card("ig", "ph-instagram-logo", "Instagram", meta.instagram_handle || "@napalm23zero", meta.instagram || meta.instagram_url) +
+      card("tt", "ph-tiktok-logo", "TikTok", meta.tiktok_handle || "@napalm23zero", meta.tiktok || meta.tiktok_url) +
+      card("xt", "ph-x-logo", "X", meta.twitter_handle || "@napalm23zero", meta.twitter_url) +
+      card("tw", "ph-twitch-logo", "Twitch", meta.twitch_handle || "/napalm23zero", meta.twitch_url) +
+      card("yt", "ph-youtube-logo", "YouTube", meta.youtube_handle || "@napalm23zero", meta.youtube_url);
   }
 
   function renderGithubHead() {

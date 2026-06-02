@@ -45,8 +45,8 @@
   "videos.intro": "Clique para assistir num modo teatro focado.",
 
   "social.eyebrow": "O_feed",
-  "social.title": "Instagram · TikTok · Twitch.",
-  "social.intro": "Embeds ao vivo dos meus canais.",
+  "social.title": "Pelas redes.",
+  "social.intro": "Meus perfis e conteúdos, a um clique.",
   "social.ph_instagram": "Defina <code>instagram:</code> em <code>content/social.&lt;lang&gt;.md</code>",
   "social.ph_tiktok": "Defina <code>tiktok:</code> em <code>content/social.&lt;lang&gt;.md</code>",
   "social.ph_twitch": "Defina <code>twitch:</code> em <code>content/social.&lt;lang&gt;.md</code>",

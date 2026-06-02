@@ -45,8 +45,8 @@
   "videos.intro": "Click to play in a focused theater view.",
 
   "social.eyebrow": "The_feed",
-  "social.title": "Instagram · TikTok · Twitch.",
-  "social.intro": "Live embeds from my channels.",
+  "social.title": "Around the web.",
+  "social.intro": "My profiles and latest drops, one click away.",
   "social.ph_instagram": "Set <code>instagram:</code> in <code>content/social.&lt;lang&gt;.md</code>",
   "social.ph_tiktok": "Set <code>tiktok:</code> in <code>content/social.&lt;lang&gt;.md</code>",
   "social.ph_twitch": "Set <code>twitch:</code> in <code>content/social.&lt;lang&gt;.md</code>",

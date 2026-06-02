@@ -114,27 +114,20 @@
 .cert__title { font-family: var(--font-display); font-weight: 600; font-size: 15px; line-height: 1.25; margin-top: 6px; }
 .cert__date { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 7px; }
 
-/* ---------- SOCIAL EMBEDS ---------- */
-.social { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
-@media (max-width: 880px){ .social { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
-.social__col { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--bg-1); }
-.social__bar { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
-.social__bar .ph { font-size: 20px; }
-.social__bar b { font-family: var(--font-display); font-weight: 600; font-size: 15px; }
-.social__bar a { margin-left: auto; font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-3); display: inline-flex; align-items: center; gap: 5px; }
-.social__bar a:hover { color: var(--red); }
-.ig .social__bar .ph { color: #e1306c; }
-.tt .social__bar .ph { color: var(--fg-max); }
-.tw .social__bar .ph { color: #9146ff; }
-.xt .social__bar .ph { color: var(--fg-max); }
-.yt .social__bar .ph { color: #ff0000; }
-.social__embed { position: relative; min-height: 420px; background: var(--bg-2); }
-.social__embed iframe { width: 100%; border: 0; display: block; }
-.social__embed blockquote { margin: 0 !important; }
-.social__ph { padding: 40px 22px; text-align: center; }
-.social__ph .ph { font-size: 30px; color: var(--fg-3); }
-.social__ph p { font-family: var(--font-mono); font-size: 12px; color: var(--fg-3); margin-top: 12px; line-height: 1.6; }
-.social__ph code { color: var(--code-fg); }
+/* ---------- SOCIAL — uniform link cards (no flaky third-party embeds) ---------- */
+.social { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.social__card { position: relative; display: flex; flex-direction: column; gap: 5px; min-height: 160px; padding: 22px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-1); transition: transform .3s var(--ease), border-color .3s; }
+.social__card:hover { transform: translateY(-5px); border-color: var(--red); }
+.social__ico { font-size: 30px; margin-bottom: 12px; color: var(--fg-1); }
+.social__plat { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+.social__handle { font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-2); }
+.social__go { position: absolute; top: 16px; right: 16px; color: var(--fg-3); font-size: 18px; transition: color .25s var(--ease), transform .25s var(--ease); }
+.social__card:hover .social__go { color: var(--red); transform: translate(3px, -3px); }
+.ig .social__ico { color: #e1306c; }
+.tt .social__ico { color: var(--fg-max); }
+.xt .social__ico { color: var(--fg-max); }
+.tw .social__ico { color: #9146ff; }
+.yt .social__ico { color: #ff0000; }
 
 /* ---------- BLOG — redesigned, more accessible ---------- */
 .blog2 { display: grid; grid-template-columns: 1.25fr 1fr; gap: 18px; }
