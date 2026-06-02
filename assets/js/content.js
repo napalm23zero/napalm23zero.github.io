@@ -72,46 +72,47 @@
   const eyebrow = (s) => (s || "").replace(/_/g, '<span class="us">_</span>');
   const tagsHTML = (v) => list(v).map((t) => `<span>${t}</span>`).join("");
 
-  // Tech logos for the skills tags (devicon, same source as the GitHub profile).
+  // Tech logos for the skills tags, served locally (no runtime CDN dependency).
+  // Sources: devicon + simpleicons, vendored into assets/img/tech/.
   // Concepts (microservices, CDC/ETL, LLM agents…) intentionally have none.
   // A missing/failed icon just removes itself, so the tag never breaks.
-  const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/";
+  const TECH_DIR = "assets/img/tech/";
   const TECH_LOGOS = [
-    ["react native", "react/react-original.svg"],
-    ["github actions", "githubactions/githubactions-original.svg"],
-    ["java", "java/java-original.svg"],
-    ["kotlin", "kotlin/kotlin-original.svg"],
-    ["python", "python/python-original.svg"],
-    ["node", "nodejs/nodejs-original.svg"],
-    ["typescript", "typescript/typescript-original.svg"],
-    ["spring", "spring/spring-original.svg"],
-    ["quarkus", "quarkus/quarkus-original.svg"],
-    ["fastapi", "fastapi/fastapi-original.svg"],
-    ["react", "react/react-original.svg"],
-    ["next", "nextjs/nextjs-original.svg"],
-    ["angular", "angularjs/angularjs-original.svg"],
-    ["gcp", "googlecloud/googlecloud-original.svg"],
-    ["aws", "amazonwebservices/amazonwebservices-original-wordmark.svg"],
-    ["azure", "azure/azure-original.svg"],
-    ["docker", "docker/docker-original.svg"],
-    ["kubernetes", "kubernetes/kubernetes-original.svg"],
-    ["terraform", "terraform/terraform-original.svg"],
-    ["openshift", "https://cdn.simpleicons.org/redhatopenshift"],
-    ["postgre", "postgresql/postgresql-original.svg"],
-    ["oracle", "oracle/oracle-original.svg"],
-    ["mongo", "mongodb/mongodb-original.svg"],
-    ["redis", "redis/redis-original.svg"],
-    ["kafka", "apachekafka/apachekafka-original.svg"],
-    ["rabbitmq", "rabbitmq/rabbitmq-original.svg"],
-    ["jenkins", "jenkins/jenkins-original.svg"],
-    ["sonar", "sonarqube/sonarqube-original.svg"],
-    ["splunk", "https://cdn.simpleicons.org/splunk"],
-    ["pandas", "pandas/pandas-original.svg"],
-    ["numpy", "numpy/numpy-original.svg"],
+    ["react native", "react.svg"],
+    ["github actions", "github-actions.svg"],
+    ["java", "java.svg"],
+    ["kotlin", "kotlin.svg"],
+    ["python", "python.svg"],
+    ["node", "nodejs.svg"],
+    ["typescript", "typescript.svg"],
+    ["spring", "spring.svg"],
+    ["quarkus", "quarkus.svg"],
+    ["fastapi", "fastapi.svg"],
+    ["react", "react.svg"],
+    ["next", "nextjs.svg"],
+    ["angular", "angular.svg"],
+    ["gcp", "gcp.svg"],
+    ["aws", "aws.svg"],
+    ["azure", "azure.svg"],
+    ["docker", "docker.svg"],
+    ["kubernetes", "kubernetes.svg"],
+    ["terraform", "terraform.svg"],
+    ["openshift", "openshift.svg"],
+    ["postgre", "postgresql.svg"],
+    ["oracle", "oracle.svg"],
+    ["mongo", "mongodb.svg"],
+    ["redis", "redis.svg"],
+    ["kafka", "kafka.svg"],
+    ["rabbitmq", "rabbitmq.svg"],
+    ["jenkins", "jenkins.svg"],
+    ["sonar", "sonarqube.svg"],
+    ["splunk", "splunk.svg"],
+    ["pandas", "pandas.svg"],
+    ["numpy", "numpy.svg"],
   ];
   const techLogo = (tag) => {
     const s = tag.toLowerCase();
-    for (const [k, path] of TECH_LOGOS) if (s.includes(k)) return path.startsWith("http") ? path : DEVICON + path;
+    for (const [k, file] of TECH_LOGOS) if (s.includes(k)) return TECH_DIR + file;
     return null;
   };
   const skillTagsHTML = (v) =>
