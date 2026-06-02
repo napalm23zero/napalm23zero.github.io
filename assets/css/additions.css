@@ -256,7 +256,9 @@
    there's genuinely room for even spacing (avoids the logo touching links
    at tight desktop widths) */
 @media (max-width: 1080px) {
-  .nav__links, .nav__cta .btn { display: none; }
+  /* collapsed top bar stays tidy: only logo + theme toggle + burger.
+     language switcher lives in the mobile menu at these widths. */
+  .nav__links, .nav__cta .btn, .nav__cta .langsw { display: none; }
   .nav__burger { display: inline-flex; }
 }
 
@@ -277,7 +279,7 @@
 .venture__side { display: flex; flex-direction: column; gap: 10px; }
 .venture__pill { font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-1); background: var(--glass); border: 1px solid var(--line); border-radius: 999px; padding: 10px 15px; display: flex; align-items: center; gap: 9px; }
 .venture__pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex: none; }
-@media (max-width: 820px) { .venture { grid-template-columns: 1fr; gap: 22px; } }
+@media (max-width: 900px) { .venture { grid-template-columns: 1fr; gap: 22px; } }
 
 /* ---------- Language switcher: discrete flags + a one-time wink ---------- */
 .langsw button { display: inline-flex; align-items: center; gap: 5px; }
