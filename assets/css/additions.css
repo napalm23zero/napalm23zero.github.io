@@ -125,6 +125,11 @@
 :root[data-theme="light"] .soc__logo { filter: brightness(0); opacity: .62; }
 @media (max-width: 480px){ .soc { width: calc(50% - 6px); } }
 
+/* ---------- Contact banner: wide, content-width, theme-swapped ---------- */
+.ctaband { position: relative; height: clamp(240px, 32vw, 420px); border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.ctaband img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+@media (max-width: 720px){ .ctaband { height: 300px; } }
+
 /* ---------- BLOG — redesigned, more accessible ---------- */
 .blog2 { display: grid; grid-template-columns: 1.25fr 1fr; gap: 18px; }
 @media (max-width: 860px){ .blog2 { grid-template-columns: 1fr; } }

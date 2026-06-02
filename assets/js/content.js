@@ -610,7 +610,7 @@
   // rodrigo-x-light.jpg). Done in JS for cross-browser reliability (CSS
   // content:url fails in Firefox).
   function applyThemePhotos(t) {
-    document.querySelectorAll(".hero__portrait img, .about__photo img, .resume__photo img").forEach((img) => {
+    document.querySelectorAll(".hero__portrait img, .about__photo img, .resume__photo img, .ctaband img").forEach((img) => {
       if (!img.dataset.darkSrc) img.dataset.darkSrc = img.getAttribute("src") || "";
       const dark = img.dataset.darkSrc;
       if (!dark) return;
