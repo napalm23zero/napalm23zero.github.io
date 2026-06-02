@@ -286,11 +286,40 @@
 .langsw button:hover .flag, .langsw button.active .flag { filter: none; opacity: 1; }
 @media (prefers-reduced-motion: no-preference) {
   @keyframes langHint {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); transform: scale(1); }
-    18% { box-shadow: 0 0 0 4px rgba(255, 0, 0, .18); transform: scale(1.06); }
-    36%, 64% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); transform: scale(1); }
-    50% { box-shadow: 0 0 0 4px rgba(255, 0, 0, .18); transform: scale(1.06); }
+    0%, 30%, 60%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); transform: scale(1); }
+    15%, 45%, 75% { box-shadow: 0 0 0 4px rgba(255, 0, 0, .18); transform: scale(1.06); }
   }
-  .langsw--hint { animation: langHint 1.5s var(--ease) both; border-radius: 999px; }
+  .langsw--hint { animation: langHint 2s var(--ease) both; border-radius: 999px; }
   .langsw--hint .flag { filter: none; opacity: 1; }
+
+  /* first-load: a quick, staggered bounce across the header items so the
+     visitor notices the nav and knows there's more to explore */
+  @keyframes navBounce {
+    0% { transform: translateY(0); }
+    35% { transform: translateY(-6px); }
+    70%, 100% { transform: translateY(0); }
+  }
+  .nav--intro .logo,
+  .nav--intro .nav__links a,
+  .nav--intro .nav__burger,
+  .nav--intro .nav__cta > * { animation: navBounce .55s var(--ease) both; }
+  .nav--intro .logo { animation-delay: .02s; }
+  .nav--intro .nav__burger { animation-delay: .1s; }
+  .nav--intro .nav__links a:nth-child(1) { animation-delay: .08s; }
+  .nav--intro .nav__links a:nth-child(2) { animation-delay: .13s; }
+  .nav--intro .nav__links a:nth-child(3) { animation-delay: .18s; }
+  .nav--intro .nav__links a:nth-child(4) { animation-delay: .23s; }
+  .nav--intro .nav__links a:nth-child(5) { animation-delay: .28s; }
+  .nav--intro .nav__links a:nth-child(6) { animation-delay: .33s; }
+  .nav--intro .nav__links a:nth-child(7) { animation-delay: .38s; }
+  .nav--intro .nav__links a:nth-child(8) { animation-delay: .43s; }
+  .nav--intro .nav__cta > *:nth-child(1) { animation-delay: .48s; }
+  .nav--intro .nav__cta > *:nth-child(2) { animation-delay: .53s; }
+  .nav--intro .nav__cta > *:nth-child(3) { animation-delay: .58s; }
 }
+
+/* ---------- Header: stays fixed, turns quieter/shorter while scrolling ---------- */
+.nav__inner { transition: height .3s var(--ease); }
+.nav.is-stuck { background: rgba(5, 5, 6, 0.7); }
+.nav.is-stuck .nav__inner { height: 58px; }
+.nav.is-stuck .logo small { opacity: .45; transition: opacity .3s var(--ease); }

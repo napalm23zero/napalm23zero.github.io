@@ -568,17 +568,25 @@
     });
   }
 
-  // One-time, quiet nudge toward the language switcher on first load.
-  let langHinted = false;
-  function hintLang() {
-    if (langHinted) return;
-    langHinted = true;
+  // One-time intro on first load: a quick bounce across the header items so
+  // visitors notice the nav, then a longer, gentle wink on the language
+  // switcher to surface the other languages.
+  let introDone = false;
+  function introOnce() {
+    if (introDone) return;
+    introDone = true;
+    const nav = document.getElementById("nav");
+    setTimeout(() => {
+      if (!nav) return;
+      nav.classList.add("nav--intro");
+      setTimeout(() => nav.classList.remove("nav--intro"), 1500);
+    }, 250);
     setTimeout(() => {
       document.querySelectorAll(".langsw").forEach((el) => {
         el.classList.add("langsw--hint");
-        setTimeout(() => el.classList.remove("langsw--hint"), 1700);
+        setTimeout(() => el.classList.remove("langsw--hint"), 2200);
       });
-    }, 850);
+    }, 1200);
   }
 
   /* ============================================================
@@ -618,7 +626,7 @@
 
     if (window.__wireSite) window.__wireSite();
     wireLangButtons();
-    hintLang();
+    introOnce();
     if (window.__observeReveals) window.__observeReveals();
   };
 
