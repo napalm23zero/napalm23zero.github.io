@@ -9,8 +9,8 @@
   "hero.cta2": "Falar comigo",
 
   "resume.eyebrow": "O_currículo",
-  "resume.title": "{{years_tech}} anos, condensados. <span class=\"accent\">Clique para se aprofundar.</span>",
-  "resume.intro": "Experiência, cargos anteriores e a stack completa, organizados para você bater o olho ou ir fundo. Tudo aqui espelha meu CV atual.",
+  "resume.title": "{{years_tech}} anos, condensados. <span class=\"accent\">Clique para explorar.</span>",
+  "resume.intro": "Experiência, cargos anteriores e a stack completa, organizados para uma leitura rápida ou um mergulho completo. Tudo aqui espelha meu CV atual.",
   "resume.via": "via",
   "resume.tab_exp": "Experiência",
   "resume.tab_earlier": "Cargos anteriores",

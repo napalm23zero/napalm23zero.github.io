@@ -9,8 +9,8 @@
   "hero.cta2": "Get in touch",
 
   "resume.eyebrow": "The_résumé",
-  "resume.title": "{{years_tech}} years, condensed. <span class=\"accent\">Click to dig in.</span>",
-  "resume.intro": "Experience, earlier roles and the full stack, organized so you can scan or go deep. Everything here mirrors my live CV.",
+  "resume.title": "{{years_tech}} years, condensed. <span class=\"accent\">Click to explore.</span>",
+  "resume.intro": "Experience, earlier roles and the full stack, organized for a quick scan or a deep read. Everything here mirrors my live CV.",
   "resume.via": "via",
   "resume.tab_exp": "Experience",
   "resume.tab_earlier": "Earlier roles",
