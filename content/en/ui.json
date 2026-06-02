@@ -3,14 +3,14 @@
   "ui.soon": "Coming soon",
 
   "nav.blog": "Read my blog",
-  "nav.resume": "Résumé PDF",
+  "nav.resume": "resume PDF",
   "nav.contact": "Contact",
   "contact.schedule": "Book a call",
 
-  "hero.cta1": "Explore my résumé",
+  "hero.cta1": "Explore my resume",
   "hero.cta2": "Get in touch",
 
-  "resume.eyebrow": "The_résumé",
+  "resume.eyebrow": "The_resume",
   "resume.title": "{{years_tech}} years, condensed. <span class=\"accent\">Click to explore.</span>",
   "resume.intro": "Experience, earlier roles and the full stack, organized for a quick scan or a deep read. Everything here mirrors my live CV.",
   "resume.via": "via",

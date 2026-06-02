@@ -50,7 +50,7 @@ window.__wireSite = function () {
     menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => menu.classList.remove("open")));
   }
 
-  // Résumé tabs (container is static; panels arrive dynamically)
+  // resume tabs (container is static; panels arrive dynamically)
   const tabs = document.getElementById("resumeTabs");
   if (tabs && !tabs.dataset.wired) {
     tabs.dataset.wired = "1";

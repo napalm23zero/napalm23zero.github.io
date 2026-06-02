@@ -112,7 +112,7 @@ Drop assets in [`assets/`](assets/) and reference them by path from the front-ma
 - Photos / covers → `assets/img/` → e.g. `portrait: assets/img/rodrigo-hero.jpg`,
   `cover: assets/img/project.jpg`
 - Certificate scans → `assets/certs/` → `image: assets/certs/oracle.jpg`
-- Downloads (CV, etc.) → `assets/files/` (the Résumé buttons point to
+- Downloads (CV, etc.) → `assets/files/` (the resume buttons point to
   `assets/files/resume.pdf`)
 
 Leave an image field empty to show the styled placeholder. Imagery follows the

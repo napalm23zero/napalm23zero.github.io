@@ -248,7 +248,7 @@
 .nav__cta { gap: 10px; }
 .langsw { padding: 2px; }
 .langsw button { padding: 4px 8px; font-size: 11px; }
-/* compact square icon button (résumé download) frees room so the nav has
+/* compact square icon button (resume download) frees room so the nav has
    real breathing space and space-between gives even gaps again */
 .btn--icon { padding: 11px; }
 .btn--icon .ph { font-size: 18px; }
