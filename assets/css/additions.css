@@ -208,7 +208,7 @@
 .hero__sub { margin-top: 20px; }
 
 .hero__portrait {
-  aspect-ratio: 1140 / 853;     /* fallback ratio (used when stacked on mobile) */
+  aspect-ratio: 4 / 5;          /* fallback ratio (used when stacked on mobile) */
   margin-bottom: 0;
   border-radius: var(--r-lg) var(--r-lg) var(--r-lg) 40px;
 }
@@ -216,7 +216,7 @@
 .hero__portrait img {
   border-radius: var(--r-lg) var(--r-lg) var(--r-lg) 40px;
   object-fit: cover;
-  object-position: 38% 50%;     /* keep his face centred while saving some laptop */
+  object-position: 50% 38%;     /* portrait photo: keep the face, crop dark headroom */
   border: 1px solid var(--line-2);
 }
 /* the original gradient edge was tuned for a tall portrait; on this photo
@@ -238,9 +238,20 @@
   .hero__portrait { max-width: 620px; margin: 8px auto 0; }
 }
 
-/* ---------- Nav: keep it on one line with the language switcher ---------- */
+/* ---------- Nav: even spacing, fits on one line with the switcher ---------- */
 .nav__links { gap: 26px; }
 .nav__links a { white-space: nowrap; }
-.nav__cta { gap: 12px; }
+.nav__cta { gap: 14px; }
 .langsw { padding: 2px; }
 .langsw button { padding: 5px 9px; font-size: 11px; }
+/* compact square icon button (résumé download) frees room so the nav has
+   real breathing space and space-between gives even gaps again */
+.btn--icon { padding: 13px; }
+.btn--icon .ph { font-size: 18px; }
+/* collapse to the burger a bit earlier so the full nav only shows when
+   there's genuinely room for even spacing (avoids the logo touching links
+   at tight desktop widths) */
+@media (max-width: 1180px) {
+  .nav__links, .nav__cta .btn { display: none; }
+  .nav__burger { display: inline-flex; }
+}

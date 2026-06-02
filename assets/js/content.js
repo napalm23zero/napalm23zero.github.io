@@ -138,7 +138,7 @@
         </nav>
         <div class="nav__cta">
           ${langSwitcher()}
-          <a class="btn btn--ghost" href="${SITE.resume}" target="_blank" rel="noopener"><i class="ph ph-file-arrow-down"></i>${T("nav.resume")}</a>
+          <a class="btn btn--ghost btn--icon" href="${SITE.resume}" target="_blank" rel="noopener" aria-label="${T("nav.resume")}" title="${T("nav.resume")}"><i class="ph ph-file-arrow-down"></i></a>
           <a class="btn btn--primary" href="#contact"><i class="ph ph-paper-plane-tilt"></i>${T("nav.contact")}</a>
         </div>
         <button class="nav__burger" id="burger" aria-label="Open menu"><i class="ph ph-list"></i></button>`;
@@ -148,6 +148,7 @@
         <button class="mobile-menu__close" id="menuClose" aria-label="Close menu"><i class="ph ph-x"></i></button>
         ${links.map((l) => `<a href="${l.href}">${l.label.toLowerCase()}</a>`).join("")}
         <a href="blog.html">${T("nav.blog").toLowerCase()}</a>
+        <a href="${SITE.resume}" target="_blank" rel="noopener">${T("nav.resume").toLowerCase()}</a>
         <a href="#contact">${T("nav.contact").toLowerCase()}<span class="us">_</span></a>
         ${langSwitcher()}`;
     }
