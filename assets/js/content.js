@@ -508,24 +508,21 @@
     if (!el) return;
     setHead("socialHead", "social");
     const { meta } = await singleton("social");
-    // Uniform link cards instead of third-party embeds: they render identically
-    // every time and never break, regardless of IG/TikTok/X widget flakiness.
-    const card = (cls, icon, name, handle, href) =>
-      href
-        ? `<a class="social__card ${cls}" href="${href}" target="_blank" rel="noopener" aria-label="${name} — ${handle}">
-        <i class="ph ph-arrow-up-right social__go"></i>
-        <i class="ph-fill ${icon} social__ico"></i>
-        <div class="social__plat">${name}</div>
-        <div class="social__handle">${handle}</div>
-      </a>`
-        : "";
-    el.innerHTML =
-      card("ig", "ph-instagram-logo", "Instagram", meta.instagram_handle || "@napalm23zero", meta.instagram || meta.instagram_url) +
-      card("tt", "ph-tiktok-logo", "TikTok", meta.tiktok_handle || "@napalm23zero", meta.tiktok || meta.tiktok_url) +
-      card("xt", "ph-x-logo", "X", meta.twitter_handle || "@napalm23zero", meta.twitter_url) +
-      card("tw", "ph-twitch-logo", "Twitch", meta.twitch_handle || "/napalm23zero", meta.twitch_url) +
-      card("yt", "ph-youtube-logo", "YouTube", meta.youtube_handle || "@napalm23zero", meta.youtube_url) +
-      card("dt", "ph-dev-to-logo", "Dev.to", meta.devto_handle || "@napalm23zero", meta.devto_url);
+    // Uniform brand-logo tiles, local SVGs, links to each profile home.
+    // No third-party embeds, so nothing can break or render at odd sizes.
+    const nets = [
+      ["github", "GitHub"], ["linkedin", "LinkedIn"], ["twitter", "X"],
+      ["instagram", "Instagram"], ["tiktok", "TikTok"], ["youtube", "YouTube"],
+      ["twitch", "Twitch"], ["devto", "Dev.to"], ["discord", "Discord"],
+      ["steam", "Steam"], ["spotify", "Spotify"],
+    ];
+    el.innerHTML = nets
+      .filter(([k]) => meta[k])
+      .map(([k, name]) => `<a class="soc" href="${meta[k]}" target="_blank" rel="noopener" title="${name}" aria-label="${name}">
+        <img class="soc__logo" src="assets/img/social/${k}.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'" />
+        <span class="soc__name">${name}</span>
+      </a>`)
+      .join("");
   }
 
   function renderGithubHead() {

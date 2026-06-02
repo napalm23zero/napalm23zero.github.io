@@ -1,20 +1,14 @@
 ---
-instagram: https://www.instagram.com/reel/C8TVZBRtu36/
-instagram_handle: @napalm23zero
-instagram_url: https://instagram.com/napalm23zero
-tiktok: https://www.tiktok.com/@napalm23zero/video/7646878275410611464
-tiktok_handle: @napalm23zero
-tiktok_url: https://www.tiktok.com/@napalm23zero
-twitter: napalm23zero
-twitter_handle: @napalm23zero
-twitter_url: https://x.com/napalm23zero
-twitch: napalm23zero
-twitch_handle: /napalm23zero
-twitch_url: https://twitch.tv/napalm23zero
-youtube_channel: UCTZ-wNvxVdSt3Lluv-ewMMA
-youtube_handle: @napalm23zero
-youtube_url: https://www.youtube.com/@napalm23zero
-devto_handle: @napalm23zero
-devto_url: https://dev.to/napalm23zero
+github: https://github.com/napalm23zero
+linkedin: https://www.linkedin.com/in/dantas-rodrigo
+twitter: https://x.com/napalm23zero
+instagram: https://www.instagram.com/napalm23zero
+tiktok: https://www.tiktok.com/@napalm23zero
+youtube: https://www.youtube.com/@napalm23zero
+twitch: https://www.twitch.tv/napalm23zero
+devto: https://dev.to/napalm23zero
+discord: https://discord.com/users/napalm23zero
+steam: https://steamcommunity.com/id/napalm23zero
+spotify: https://open.spotify.com/user/22shqo6vu5mqvdgwxi66gawta
 ---
-Social cards. Each links to the profile (or the specific post for instagram/tiktok).
+All social profiles (home pages). Each renders as a uniform logo tile.
