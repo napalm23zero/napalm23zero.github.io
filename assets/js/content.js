@@ -185,7 +185,7 @@
     const cls = extraClass ? ` ${extraClass}` : "";
     return src
       ? `<img class="loaded-img${cls}" src="${src}" alt="" style="width:100%;height:100%;object-fit:cover" />`
-      : `<div class="ph-img${cls}" data-label="${label}"></div>`;
+      : `<div class="ph-img${cls}" data-label="${T("ui.soon")}"></div>`;
   }
 
   /* ============================================================
@@ -430,7 +430,7 @@
     const PREVIEW = 3;
     const cardHTML = (c) => `
       <div class="cert__media">
-        ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : `<div class="ph-img" data-label="certificate"></div>`}
+        ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : `<div class="ph-img" data-label="${T("ui.soon")}"></div>`}
         <div class="cert__zoom"><i class="ph ph-magnifying-glass-plus"></i></div>
       </div>
       <div class="cert__body">
@@ -441,7 +441,7 @@
     const open = (c) => {
       if (!window.openModal) return;
       if (c.image) window.openModal({ imgSrc: c.image, isImage: true, title: c.title, sub: `${c.issuer} · ${c.date}` });
-      else window.openModal({ html: `<div class="ph-img" data-label="certificate scan goes here" style="position:absolute;inset:0"></div>`, title: c.title, sub: `${c.issuer} · ${c.date}` });
+      else window.openModal({ html: `<div class="ph-img" data-label="${T("ui.soon")}" style="position:absolute;inset:0"></div>`, title: c.title, sub: `${c.issuer} · ${c.date}` });
     };
     const gallery = () => {
       const cells = CERTS.map((c, i) => `<div class="cert" data-ci="${i}">${cardHTML(c)}</div>`).join("");
@@ -512,15 +512,15 @@
     const ph = (icon, lines) => `<div class="social__ph"><i class="ph ${icon}"></i><p>${lines}</p></div>`;
     let ig = meta.instagram
       ? `<blockquote class="instagram-media" data-instgrm-permalink="${meta.instagram}" data-instgrm-version="14" style="width:100%;min-width:0;margin:0;background:#000"></blockquote>`
-      : ph("ph-instagram-logo", T("social.ph_instagram"));
+      : ph("ph-instagram-logo", T("ui.soon"));
     let tt;
     if (meta.tiktok) {
       const id = (meta.tiktok.match(/video\/(\d+)/) || [])[1] || "";
       tt = `<blockquote class="tiktok-embed" cite="${meta.tiktok}" data-video-id="${id}" style="margin:0;min-width:0"><section></section></blockquote>`;
-    } else tt = ph("ph-tiktok-logo", T("social.ph_tiktok"));
+    } else tt = ph("ph-tiktok-logo", T("ui.soon"));
     let tw = meta.twitch
       ? `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(meta.twitch)}&parent=${host}&muted=true&autoplay=false" height="420" width="100%" allowfullscreen></iframe>`
-      : ph("ph-twitch-logo", T("social.ph_twitch"));
+      : ph("ph-twitch-logo", T("ui.soon"));
     el.innerHTML = `
       <div class="social__col ig">
         <div class="social__bar"><i class="ph-fill ph-instagram-logo"></i><b>Instagram</b><a href="${meta.instagram_url || "https://instagram.com/"}" target="_blank" rel="noopener">${meta.instagram_handle || "@rodrigo"} <i class="ph ph-arrow-up-right"></i></a></div>
