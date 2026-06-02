@@ -126,7 +126,7 @@
 @media (max-width: 480px){ .soc { width: calc(50% - 6px); } }
 
 /* ---------- Contact banner: wide, content-width, theme-swapped ---------- */
-.ctaband { position: relative; height: clamp(240px, 32vw, 420px); border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.ctaband { position: relative; height: clamp(240px, 32vw, 420px); margin-top: clamp(16px, 2vw, 26px); border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
 .ctaband img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
 @media (max-width: 720px){ .ctaband { height: 300px; } }
 
