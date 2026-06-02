@@ -109,6 +109,9 @@
     ["splunk", "splunk.svg"],
     ["pandas", "pandas.svg"],
     ["numpy", "numpy.svg"],
+    ["firebird", "firebird.svg"],
+    ["db2", "db2.svg"],
+    ["apigee", "apigee.svg"],
   ];
   const techLogo = (tag) => {
     const s = tag.toLowerCase();
