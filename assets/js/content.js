@@ -134,7 +134,7 @@
         <a class="logo" href="#top" aria-label="${SITE.name} — home">${logoHTML(SITE.brand || "Hustle Tech")}</a>
         <nav class="nav__links">
           ${links.map((l) => `<a href="${l.href}">${l.label}</a>`).join("")}
-          <a href="blog.html">${T("nav.blog")}</a>
+          <a href="blog.html">Blog</a>
         </nav>
         <div class="nav__cta">
           ${langSwitcher()}

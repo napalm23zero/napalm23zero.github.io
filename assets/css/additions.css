@@ -198,14 +198,19 @@
 .blogtop__right { display: flex; align-items: center; gap: 14px; }
 .mobile-menu .langsw { margin-top: 28px; align-self: flex-start; }
 
-/* ---------- Hero: landscape portrait (real photo, ~1.4:1) ---------- */
-/* The hero photo is wide, so the frame matches its (cropped) native ratio
-   — no crop at render time → both Rodrigo and the laptop stay in frame —
-   and the grid rebalances to give the image real presence next to the
-   headline. The source's baked-in white side bars were trimmed away. */
-.hero__grid { grid-template-columns: 1.05fr 0.95fr; }
+/* ---------- Hero: landscape portrait (real photo) ---------- */
+/* The photo is landscape (you + the laptop). The frame is a touch
+   narrower than the image so object-fit: cover trims the source's faint
+   baked-in side margins. Headline is dialed back and the grid leans
+   toward the photo so the two columns balance instead of the image
+   floating tiny next to a giant headline. */
+.hero { padding-top: 116px; }
+.hero__grid { grid-template-columns: 1fr 1.1fr; align-items: center; gap: clamp(28px, 3.6vw, 56px); }
+.hero h1 { font-size: clamp(40px, 6vw, 82px); }
+.hero__sub { margin-top: 20px; }
+
 .hero__portrait {
-  aspect-ratio: 1200 / 853;
+  aspect-ratio: 1140 / 853;     /* matches the cleaned photo (white side bars removed) */
   margin-bottom: 0;
   border-radius: var(--r-lg) var(--r-lg) var(--r-lg) 40px;
 }
@@ -214,14 +219,25 @@
   border-radius: var(--r-lg) var(--r-lg) var(--r-lg) 40px;
   object-fit: cover;
   object-position: center;
+  border: 1px solid var(--line-2);
 }
-.hero__portrait::before { border-radius: var(--r-lg) var(--r-lg) var(--r-lg) 40px; }
-/* offset accent panel + floating chips, retuned for a wide short card */
-.hero__portrait::after { width: 54%; height: 70%; right: -14px; bottom: -14px; }
+/* the original gradient edge was tuned for a tall portrait; on the wide
+   photo it read as a faint light sliver, so drop it and let the offset
+   red panel be the accent. */
+.hero__portrait::before { display: none; }
+/* offset accent panel + floating chips, retuned for this card */
+.hero__portrait::after { width: 50%; height: 64%; right: -14px; bottom: -14px; }
 .hero__tag { top: 16px; right: -12px; }
 .hero__badge { bottom: -16px; left: 16px; }
 
 @media (max-width: 980px) {
   .hero__grid { grid-template-columns: 1fr; }
-  .hero__portrait { max-width: 600px; margin: 8px auto 0; }
+  .hero__portrait { max-width: 620px; margin: 8px auto 0; }
 }
+
+/* ---------- Nav: keep it on one line with the language switcher ---------- */
+.nav__links { gap: 26px; }
+.nav__links a { white-space: nowrap; }
+.nav__cta { gap: 12px; }
+.langsw { padding: 2px; }
+.langsw button { padding: 5px 9px; font-size: 11px; }
