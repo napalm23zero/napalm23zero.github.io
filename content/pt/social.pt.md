@@ -14,7 +14,7 @@ twitch_url: https://twitch.tv/napalm23zero
 youtube_channel: UCTZ-wNvxVdSt3Lluv-ewMMA
 youtube_handle: @napalm23zero
 youtube_url: https://www.youtube.com/@napalm23zero
+devto_handle: @napalm23zero
+devto_url: https://dev.to/napalm23zero
 ---
-Social embeds. instagram/tiktok = specific post URLs; twitter = handle (live timeline);
-twitch = channel; youtube_channel = UC... id (embeds the latest uploads playlist).
-Leave any field blank to show a localized "coming soon".
+Social cards. Each links to the profile (or the specific post for instagram/tiktok).

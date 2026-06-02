@@ -524,7 +524,8 @@
       card("tt", "ph-tiktok-logo", "TikTok", meta.tiktok_handle || "@napalm23zero", meta.tiktok || meta.tiktok_url) +
       card("xt", "ph-x-logo", "X", meta.twitter_handle || "@napalm23zero", meta.twitter_url) +
       card("tw", "ph-twitch-logo", "Twitch", meta.twitch_handle || "/napalm23zero", meta.twitch_url) +
-      card("yt", "ph-youtube-logo", "YouTube", meta.youtube_handle || "@napalm23zero", meta.youtube_url);
+      card("yt", "ph-youtube-logo", "YouTube", meta.youtube_handle || "@napalm23zero", meta.youtube_url) +
+      card("dt", "ph-dev-to-logo", "Dev.to", meta.devto_handle || "@napalm23zero", meta.devto_url);
   }
 
   function renderGithubHead() {
