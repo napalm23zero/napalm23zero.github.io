@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Rodrigo Dantas — Senior Software Engineer &amp; Architect</title>
-<meta name="description" content="Senior Software Engineer & Software Architect. 10+ years building Java/Python/Node/React systems for banking and fintech across LATAM and the US. Founder of Hustle Tech." />
+<meta name="description" content="Senior Software Engineer & Software Architect. 10+ years building Java/Python/Node/React systems across finance, tax, retail, travel and enterprise — in LATAM, the US and Europe. Founder of Hustle Tech." />
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,23 +47,41 @@
 
   <div class="divider"></div>
 
+  <!-- ===== VENTURE / HUSTLE TECH (content/hustle.md) ===== -->
+  <section class="section section--tight" id="venture">
+    <div class="wrap" id="hustleMount"></div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- ===== RESUME (content/experience · earlier · skills) ===== -->
   <section class="section" id="resume">
     <div class="wrap">
       <div id="resumeHead"></div>
 
-      <div class="resume__bar reveal">
-        <div class="tabs" id="resumeTabs">
-          <button class="active" data-tab="exp">Experience</button>
-          <button data-tab="earlier">Earlier roles</button>
-          <button data-tab="skills">Skills</button>
-        </div>
-        <a class="btn btn--ghost" id="resumeDownload" href="assets/files/resume.pdf" target="_blank" rel="noopener"><i class="ph ph-download-simple"></i>Download full PDF</a>
-      </div>
+      <div class="resume__layout">
+        <div class="resume__main">
+          <div class="resume__bar reveal">
+            <div class="tabs" id="resumeTabs">
+              <button class="active" data-tab="exp">Experience</button>
+              <button data-tab="earlier">Earlier roles</button>
+              <button data-tab="skills">Skills</button>
+            </div>
+            <a class="btn btn--ghost" id="resumeDownload" href="assets/files/resume.pdf" target="_blank" rel="noopener"><i class="ph ph-download-simple"></i>Download full PDF</a>
+          </div>
 
-      <div class="tabpanel active" data-panel="exp" id="panel-exp"></div>
-      <div class="tabpanel" data-panel="earlier" id="panel-earlier"></div>
-      <div class="tabpanel" data-panel="skills" id="panel-skills"></div>
+          <div class="tabpanel active" data-panel="exp" id="panel-exp"></div>
+          <div class="tabpanel" data-panel="earlier" id="panel-earlier"></div>
+          <div class="tabpanel" data-panel="skills" id="panel-skills"></div>
+        </div>
+
+        <aside class="resume__aside reveal" data-d="1">
+          <div class="resume__photo">
+            <img src="assets/img/rodrigo-desk.png" alt="Rodrigo at his workstation" loading="lazy" />
+            <div class="float-cap"><i class="ph ph-terminal-window"></i><span>~/career</span></div>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 

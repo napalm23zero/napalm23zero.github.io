@@ -17,7 +17,7 @@ avatar: https://github.com/napalm23zero.png
 quote: "Don't follow trends. Create them."
 contact_eyebrow: Let's_talk
 contact_title: Own a domain. Build something that lasts.
-contact_sub: I'm open to senior IC and staff roles — and to interesting problems in banking, fintech and applied AI. Fastest way to reach me is email or LinkedIn.
+contact_sub: I'm open to senior IC and staff roles, and to interesting problems in banking, fintech and applied AI. Fastest way to reach me is email or LinkedIn.
 ---
 Global site identity. Everything above feeds the nav, hero socials, contact card,
 footer and the blog header. Edit a value and it updates everywhere it appears.

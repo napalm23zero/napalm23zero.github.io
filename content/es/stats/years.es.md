@@ -1,5 +1,5 @@
 ---
-num: 10
+num: 15
 accent: +
-label: Años construyendo sistemas en producción
+label: Años en tecnología (desde 2009)
 ---

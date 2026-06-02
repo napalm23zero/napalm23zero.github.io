@@ -11,7 +11,7 @@ So we built an agent.
 
 ## The problem with runbooks
 
-Runbooks rot. They describe the system as it was the day someone had time to write them down. The actual knowledge — *which query finds this failure, what the root cause turned out to be last time* — lived in people's heads and in closed tickets.
+Runbooks rot. They describe the system as it was the day someone had time to write them down. The actual knowledge, *which query finds this failure, what the root cause turned out to be last time*, lived in people's heads and in closed tickets.
 
 ## What we built
 

@@ -1,5 +1,5 @@
 ---
-title: Data
+title: Data & Messaging
 icon: ph-database
-tags: PostgreSQL | Oracle PL/SQL | Redis | MongoDB | Firebird | DB2 | Kafka
+tags: PostgreSQL | Oracle PL/SQL | MongoDB | Redis | Firebird | DB2 | Kafka | RabbitMQ
 ---

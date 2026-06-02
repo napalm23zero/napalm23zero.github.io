@@ -1,5 +1,5 @@
 ---
 num: 3
-accent:
-label: Languages — PT native, EN/ES pro
+accent: 
+label: Working languages (PT/EN/ES)
 ---

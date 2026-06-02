@@ -4,3 +4,4 @@ company: Banco BV (Consultor Opah)
 stack: Java · Spring Boot · Apache Camel · confiabilidade de sistemas
 dates: Abr 2021 — Nov 2021
 ---
+Backend para um banco brasileiro, serviços Java/Spring conectados via Apache Camel, focados em confiabilidade de integração sob carga bancária real.

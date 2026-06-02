@@ -9,8 +9,8 @@
   "hero.cta2": "Get in touch",
 
   "resume.eyebrow": "The_résumé",
-  "resume.title": "Ten years, condensed. <span class=\"accent\">Click to dig in.</span>",
-  "resume.intro": "Experience, earlier roles and the full stack — organized so you can scan or go deep. Everything here mirrors my live CV.",
+  "resume.title": "Fifteen years, condensed. <span class=\"accent\">Click to dig in.</span>",
+  "resume.intro": "Experience, earlier roles and the full stack, organized so you can scan or go deep. Everything here mirrors my live CV.",
   "resume.via": "via",
   "resume.tab_exp": "Experience",
   "resume.tab_earlier": "Earlier roles",
@@ -19,7 +19,7 @@
 
   "work.eyebrow": "Selected_work",
   "work.title": "Things I've built &amp; shipped.",
-  "work.intro": "A few systems I owned end-to-end — from architecture to production.",
+  "work.intro": "A few systems I owned end-to-end, from architecture to production.",
 
   "github.eyebrow": "Open_source",
   "github.title": "Live from GitHub.",
@@ -51,11 +51,11 @@
 
   "blog.eyebrow": "The_blog",
   "blog.title": "Notes from the build.",
-  "blog.intro": "Engineering, AI agents and lessons from banking-grade systems. Posts are plain Markdown — one file per language.",
+  "blog.intro": "Engineering, AI agents and lessons from high-stakes production systems. Posts are plain Markdown, one file per language.",
   "blog.readfull": "Read the full blog",
   "blog.backprofile": "Back to profile",
   "blog.hero_title": "Notes from <em>the build.</em>",
-  "blog.hero_sub": "Engineering, AI agents and hard-won lessons from banking-grade systems. New posts land here — bookmark this page to follow along.",
+  "blog.hero_sub": "Engineering, AI agents and hard-won lessons from high-stakes production systems. New posts land here. Bookmark this page to follow along.",
   "blog.hero_tags": "Engineering | AI & Operations | Architecture | Founder notes",
   "blog.follow": "Follow_",
   "blog.list.eyebrow": "All_posts",

@@ -1,5 +1,5 @@
 ---
 title: IA & Arquitectura
 icon: ph-robot
-tags: Agentes LLM | Microservicios | SaaS multi-tenant | CDC & ETL | Event-driven | OpenAPI
+tags: LLM Agents (Claude/OpenAI) | LangChain / RAG | Pandas / NumPy | Microservices | CDC & ETL | Event-driven | Multi-tenant SaaS
 ---

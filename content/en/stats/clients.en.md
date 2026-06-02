@@ -1,5 +1,5 @@
 ---
-num: 12
-accent:
-label: Paying clients on Hustle Tech SaaS
+num: 8
+accent: +
+label: Tech stacks shipped to production
 ---

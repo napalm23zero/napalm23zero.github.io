@@ -2,10 +2,10 @@
 title: Dueño del contrato: diseño de APIs para compliance bancario
 date: 2026-03-04
 category: Ingeniería
-excerpt: Notas sobre diseñar APIs RESTful para compliance fiscal y contable en Brasil y LATAM — y por qué ser dueño del contrato importa.
+excerpt: Notas sobre diseñar APIs RESTful para compliance fiscal y contable en Brasil y LATAM, y por qué ser dueño del contrato importa.
 ---
 
-Las APIs de compliance no tienen glamour y no perdonan. Equivócate en el contrato y no recibes un reporte de bug — recibes un regulador.
+Las APIs de compliance no tienen glamour y no perdonan. Equivócate en el contrato y no recibes un reporte de bug, recibes un regulador.
 
 ## OpenAPI primero, código después
 

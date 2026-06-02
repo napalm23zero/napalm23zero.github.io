@@ -60,6 +60,7 @@
 
   const list = (v) => (v || "").split("|").map((s) => s.trim()).filter(Boolean);
   const md = (s) => (window.marked ? marked.parse(s || "") : s || "");
+  const mdi = (s) => (window.marked ? marked.parseInline(s || "") : s || "");
   const eyebrow = (s) => (s || "").replace(/_/g, '<span class="us">_</span>');
   const tagsHTML = (v) => list(v).map((t) => `<span>${t}</span>`).join("");
 
@@ -215,6 +216,30 @@
       </div>`;
   }
 
+  async function renderHustle() {
+    const el = $("hustleMount");
+    if (!el) return;
+    const { meta, body } = await singleton("hustle");
+    const stats = list(meta.stats).map((s) => `<span class="venture__pill">${s}</span>`).join("");
+    el.innerHTML = `
+      <div class="venture reveal">
+        <div class="venture__main">
+          <div class="eyebrow">${eyebrow(meta.eyebrow)}</div>
+          <div class="venture__brand">
+            <span class="venture__logo"><span class="venture__bars"><i></i><i></i><i></i></span></span>
+            <div>
+              <h3 class="venture__name">${meta.name || ""}</h3>
+              <div class="venture__role">${meta.role || ""}${meta.since ? ` · ${meta.since}` : ""}</div>
+            </div>
+          </div>
+          ${meta.tagline ? `<p class="venture__lead">${mdi(meta.tagline)}</p>` : ""}
+          <p class="venture__body">${mdi(body)}</p>
+          ${meta.url ? `<a class="btn btn--ghost" href="${meta.url}" target="_blank" rel="noopener"><i class="ph ph-arrow-up-right"></i>${meta.cta || "Visit"}</a>` : ""}
+        </div>
+        <div class="venture__side">${stats}</div>
+      </div>`;
+  }
+
   async function renderExperience() {
     const el = $("panel-exp");
     if (!el) return;
@@ -244,7 +269,10 @@
     el.innerHTML = `<div class="earlier">${items
       .map(
         (it) => `<div class="earlier__row">
-          <span class="r">${it.meta.role || ""} — <b>${it.meta.company || ""}</b></span>
+          <div class="earlier__lead">
+            <span class="r">${it.meta.role || ""} — <b>${it.meta.company || ""}</b></span>
+            ${it.body ? `<span class="earlier__desc">${mdi(it.body)}</span>` : ""}
+          </div>
           <span class="t">${it.meta.stack || ""}</span>
           <span class="d">${it.meta.dates || ""}</span>
         </div>`
@@ -553,6 +581,7 @@
       renderHero(),
       renderStats(),
       renderAbout(),
+      renderHustle(),
       renderExperience(),
       renderEarlier(),
       renderSkills(),

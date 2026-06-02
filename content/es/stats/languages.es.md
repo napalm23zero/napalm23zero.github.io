@@ -1,5 +1,5 @@
 ---
 num: 3
-accent:
-label: Idiomas — PT nativo, EN/ES profesional
+accent: 
+label: Idiomas de trabajo (PT/EN/ES)
 ---

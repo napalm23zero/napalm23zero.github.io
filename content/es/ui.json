@@ -9,8 +9,8 @@
   "hero.cta2": "Hablemos",
 
   "resume.eyebrow": "El_CV",
-  "resume.title": "Diez años, condensados. <span class=\"accent\">Haz clic para profundizar.</span>",
-  "resume.intro": "Experiencia, cargos anteriores y el stack completo — organizados para que ojees o entres a fondo. Todo aquí refleja mi CV actual.",
+  "resume.title": "Quince años, condensados. <span class=\"accent\">Haz clic para profundizar.</span>",
+  "resume.intro": "Experiencia, cargos anteriores y el stack completo, organizados para que ojees o entres a fondo. Todo aquí refleja mi CV actual.",
   "resume.via": "vía",
   "resume.tab_exp": "Experiencia",
   "resume.tab_earlier": "Cargos anteriores",
@@ -19,7 +19,7 @@
 
   "work.eyebrow": "Trabajos_seleccionados",
   "work.title": "Cosas que construí &amp; lancé.",
-  "work.intro": "Algunos sistemas que lideré de principio a fin — de la arquitectura a producción.",
+  "work.intro": "Algunos sistemas que lideré de principio a fin, de la arquitectura a producción.",
 
   "github.eyebrow": "Código_abierto",
   "github.title": "En vivo desde GitHub.",
@@ -51,11 +51,11 @@
 
   "blog.eyebrow": "El_blog",
   "blog.title": "Notas desde la construcción.",
-  "blog.intro": "Ingeniería, agentes de IA y lecciones de sistemas de nivel bancario. Los posts son Markdown puro — un archivo por idioma.",
+  "blog.intro": "Ingeniería, agentes de IA y lecciones de sistemas críticos en producción. Los posts son Markdown puro, un archivo por idioma.",
   "blog.readfull": "Leer el blog completo",
   "blog.backprofile": "Volver al perfil",
   "blog.hero_title": "Notas desde la <em>construcción.</em>",
-  "blog.hero_sub": "Ingeniería, agentes de IA y lecciones difíciles de sistemas de nivel bancario. Los nuevos posts llegan aquí — guarda esta página para seguirlos.",
+  "blog.hero_sub": "Ingeniería, agentes de IA y lecciones difíciles de sistemas críticos en producción. Los nuevos posts llegan aquí. Guarda esta página para seguirlos.",
   "blog.hero_tags": "Ingeniería | IA & Operaciones | Arquitectura | Notas de fundador",
   "blog.follow": "Sígueme_",
   "blog.list.eyebrow": "Todos_los_posts",

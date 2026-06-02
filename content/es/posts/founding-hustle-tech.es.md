@@ -26,4 +26,4 @@ Internamente me apoyo en agentes LLM para pruebas automatizadas, revisión de ar
 
 ## Lo que aprendí
 
-La rentabilidad es una función forzante. Me hizo implacable con el alcance y generoso con la confiabilidad — porque cada cliente de pago es una relación, no una métrica.
+La rentabilidad es una función forzante. Me hizo implacable con el alcance y generoso con la confiabilidad, porque cada cliente de pago es una relación, no una métrica.

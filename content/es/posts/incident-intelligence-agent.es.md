@@ -11,7 +11,7 @@ Así que construimos un agente.
 
 ## El problema de los runbooks
 
-Los runbooks se pudren. Describen el sistema como era el día en que alguien tuvo tiempo de documentarlo. El conocimiento real — *qué consulta encuentra este fallo, cuál resultó ser la causa raíz la última vez* — vivía en la cabeza de las personas y en tickets cerrados.
+Los runbooks se pudren. Describen el sistema como era el día en que alguien tuvo tiempo de documentarlo. El conocimiento real, *qué consulta encuentra este fallo, cuál resultó ser la causa raíz la última vez*, vivía en la cabeza de las personas y en tickets cerrados.
 
 ## Qué construimos
 

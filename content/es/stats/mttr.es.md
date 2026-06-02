@@ -1,5 +1,5 @@
 ---
 num: ~60
 accent: %
-label: de MTTR reducido con triaje de incidentes con IA
+label: de MTTR recortado con IA en el triaje
 ---

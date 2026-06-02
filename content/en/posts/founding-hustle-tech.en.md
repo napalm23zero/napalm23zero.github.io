@@ -26,4 +26,4 @@ Internally I lean on LLM agents for automated testing, architecture review, vuln
 
 ## What I learned
 
-Profitability is a forcing function. It made me ruthless about scope and generous about reliability — because every paying client is a relationship, not a metric.
+Profitability is a forcing function. It made me ruthless about scope and generous about reliability, because every paying client is a relationship, not a metric.

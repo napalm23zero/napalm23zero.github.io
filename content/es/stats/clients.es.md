@@ -1,5 +1,5 @@
 ---
-num: 12
-accent:
-label: Clientes de pago en el SaaS de Hustle Tech
+num: 8
+accent: +
+label: Stacks llevados a producción
 ---

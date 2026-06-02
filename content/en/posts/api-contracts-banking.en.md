@@ -2,10 +2,10 @@
 title: Owning the contract: API design for banking compliance
 date: 2026-03-04
 category: Engineering
-excerpt: Notes on designing RESTful APIs for fiscal and accounting compliance across Brazil and LATAM — and why being the contract owner matters.
+excerpt: Notes on designing RESTful APIs for fiscal and accounting compliance across Brazil and LATAM, and why being the contract owner matters.
 ---
 
-Compliance APIs are unglamorous and unforgiving. Get the contract wrong and you don't get a bug report — you get a regulator.
+Compliance APIs are unglamorous and unforgiving. Get the contract wrong and you don't get a bug report, you get a regulator.
 
 ## OpenAPI first, code second
 

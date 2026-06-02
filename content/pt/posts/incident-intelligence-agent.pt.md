@@ -11,7 +11,7 @@ Então construímos um agente.
 
 ## O problema dos runbooks
 
-Runbooks apodrecem. Eles descrevem o sistema como ele era no dia em que alguém teve tempo de documentá-lo. O conhecimento de verdade — *qual consulta encontra esta falha, qual foi a causa-raiz da última vez* — vivia na cabeça das pessoas e em tickets fechados.
+Runbooks apodrecem. Eles descrevem o sistema como ele era no dia em que alguém teve tempo de documentá-lo. O conhecimento de verdade, *qual consulta encontra esta falha, qual foi a causa-raiz da última vez*, vivia na cabeça das pessoas e em tickets fechados.
 
 ## O que construímos
 

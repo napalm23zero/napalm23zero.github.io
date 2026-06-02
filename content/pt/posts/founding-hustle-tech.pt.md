@@ -26,4 +26,4 @@ Internamente, me apoio em agentes LLM para testes automatizados, revisão de arq
 
 ## O que aprendi
 
-Lucratividade é uma função forçante. Me deixou implacável com escopo e generoso com confiabilidade — porque cada cliente pagante é uma relação, não uma métrica.
+Lucratividade é uma função forçante. Me deixou implacável com escopo e generoso com confiabilidade, porque cada cliente pagante é uma relação, não uma métrica.

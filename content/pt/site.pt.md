@@ -17,6 +17,6 @@ avatar: https://github.com/napalm23zero.png
 quote: "Não siga tendências. Crie-as."
 contact_eyebrow: Vamos_conversar
 contact_title: Seja dono de um domínio. Construa algo que dure.
-contact_sub: Estou aberto a posições de IC sênior e staff — e a problemas interessantes em banking, fintech e IA aplicada. O jeito mais rápido de me achar é por e-mail ou LinkedIn.
+contact_sub: Estou aberto a posições de IC sênior e staff, e a problemas interessantes em banking, fintech e IA aplicada. O jeito mais rápido de me achar é por e-mail ou LinkedIn.
 ---
 Identidade global do site (versão PT).

@@ -2,10 +2,10 @@
 title: Dono do contrato: design de APIs para compliance bancário
 date: 2026-03-04
 category: Engenharia
-excerpt: Notas sobre projetar APIs RESTful para compliance fiscal e contábil no Brasil e na América Latina — e por que ser dono do contrato importa.
+excerpt: Notas sobre projetar APIs RESTful para compliance fiscal e contábil no Brasil e na América Latina, e por que ser dono do contrato importa.
 ---
 
-APIs de compliance não têm glamour e não perdoam. Erre o contrato e você não recebe um relatório de bug — você recebe um regulador.
+APIs de compliance não têm glamour e não perdoam. Erre o contrato e você não recebe um relatório de bug, você recebe um regulador.
 
 ## OpenAPI primeiro, código depois
 

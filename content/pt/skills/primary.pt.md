@@ -1,5 +1,5 @@
 ---
-title: Principais
+title: Stack principal
 icon: ph-code
-tags: Java 8→21 | Spring Boot | Quarkus | Apache Camel | Python | Pandas | FastAPI | Node.js
+tags: Java 8→21 | Kotlin | Python | Node.js | TypeScript | Spring Boot | Quarkus | FastAPI
 ---
