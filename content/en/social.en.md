@@ -1,14 +1,14 @@
 ---
 instagram:
-instagram_handle: @rodrigo
-instagram_url: https://instagram.com/
+instagram_handle: @napalm23zero
+instagram_url: https://instagram.com/napalm23zero
 tiktok:
-tiktok_handle: @rodrigo
-tiktok_url: https://tiktok.com/
-twitch: rodrigodantas
-twitch_handle: /rodrigodantas
-twitch_url: https://twitch.tv/rodrigodantas
+tiktok_handle: @napalm23zero
+tiktok_url: https://www.tiktok.com/@napalm23zero
+twitch: napalm23zero
+twitch_handle: /napalm23zero
+twitch_url: https://twitch.tv/napalm23zero
 ---
-Social embeds. Set `instagram:` to a post/reel URL, `tiktok:` to a video URL, and
-`twitch:` to a channel name. Leave any blank to show a styled placeholder.
-Twitch only loads on the live domain (parent= must match); locally it may stay blank.
+Social embeds. Handles and links point to the live profiles. To embed a specific
+post, set `instagram:` to a reel/post URL and `tiktok:` to a video URL; `twitch:`
+is the channel name and only loads on the live domain.
