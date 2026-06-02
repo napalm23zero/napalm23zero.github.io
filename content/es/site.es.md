@@ -9,6 +9,8 @@ nav: Sobre:#about | CV:#resume | Trabajo:#work | GitHub:#github | Certs:#certs |
 resume: assets/files/resume.pdf
 email: rodrigo.dantas@hustletech.dev
 phone: +55 11 941-841-994
+whatsapp: 5511941841994
+calendar: https://calendar.app.google/8JFGEyXe7BYzTnGJ7
 location: São Paulo, BR
 github: https://github.com/napalm23zero
 github_user: napalm23zero
@@ -17,7 +19,7 @@ youtube: #videos
 avatar: https://github.com/napalm23zero.png
 quote: "No sigas tendencias. Créalas."
 contact_eyebrow: Hablemos_
-contact_title: Sé dueño de un dominio. Construye algo que perdure.
-contact_sub: Estoy abierto a posiciones de IC senior y staff, y a problemas interesantes en banca, fintech e IA aplicada. La forma más rápida de contactarme es por correo o LinkedIn.
+contact_title: Pasa a saludar.
+contact_sub: Siempre con ganas de charlar, sobre tecnología, proyectos, jiu-jitsu o nada en particular. Elige el canal que te quede más fácil abajo y escríbeme.
 ---
 Identidad global del sitio (versión ES).

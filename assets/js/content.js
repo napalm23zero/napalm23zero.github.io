@@ -505,7 +505,9 @@
         <h2 style="margin-top:18px">${SITE.contact_title || ""}</h2>
         <p>${SITE.contact_sub || ""}</p>
         <div class="contact__actions">
-          <a class="btn btn--primary" href="mailto:${SITE.email}"><i class="ph ph-envelope-simple"></i>${SITE.email}</a>
+          ${SITE.whatsapp ? `<a class="btn btn--primary" href="https://wa.me/${SITE.whatsapp}" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo"></i>WhatsApp</a>` : ""}
+          ${SITE.calendar ? `<a class="btn btn--ghost" href="${SITE.calendar}" target="_blank" rel="noopener"><i class="ph ph-calendar-check"></i>${T("contact.schedule")}</a>` : ""}
+          <a class="btn btn--ghost" href="mailto:${SITE.email}"><i class="ph ph-envelope-simple"></i>Email</a>
           ${SITE.linkedin ? `<a class="btn btn--ghost" href="${SITE.linkedin}" target="_blank" rel="noopener"><i class="ph ph-linkedin-logo"></i>LinkedIn</a>` : ""}
           ${SITE.github ? `<a class="btn btn--ghost" href="${SITE.github}" target="_blank" rel="noopener"><i class="ph ph-github-logo"></i>GitHub</a>` : ""}
         </div>`;
