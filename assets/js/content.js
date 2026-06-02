@@ -116,10 +116,10 @@
     if (extra) a.push(extra);
     return a.join("");
   }
-  const FLAG = { pt: "🇧🇷", en: "🇺🇸", es: "🇪🇸" };
+  const FLAG = { pt: "br", en: "us", es: "es" }; // local SVGs: crisp on any screen, identical on every OS
   function langSwitcher() {
     return `<div class="langsw" role="group" aria-label="${T("ui.language")}">${window.I18N.langs
-      .map((l) => `<button type="button" data-lang="${l}"${l === window.I18N.lang ? ' class="active"' : ""}><span class="flag">${FLAG[l] || ""}</span>${window.I18N.label[l]}</button>`)
+      .map((l) => `<button type="button" data-lang="${l}"${l === window.I18N.lang ? ' class="active"' : ""}>${FLAG[l] ? `<img class="flag" src="assets/img/flags/${FLAG[l]}.svg" alt="" width="18" height="12" loading="lazy" />` : ""}${window.I18N.label[l]}</button>`)
       .join("")}</div>`;
   }
   function imgOrPh(src, label, extraClass) {

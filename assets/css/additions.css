@@ -282,7 +282,7 @@
 
 /* ---------- Language switcher: discrete flags + a one-time wink ---------- */
 .langsw button { display: inline-flex; align-items: center; gap: 5px; }
-.langsw .flag { font-size: 12px; line-height: 1; filter: grayscale(1); opacity: .55; transition: filter .25s var(--ease), opacity .25s var(--ease); }
+.langsw .flag { width: 18px; height: 12px; border-radius: 2px; object-fit: cover; filter: grayscale(1); opacity: .55; transition: filter .25s var(--ease), opacity .25s var(--ease); }
 .langsw button:hover .flag, .langsw button.active .flag { filter: none; opacity: 1; }
 @media (prefers-reduced-motion: no-preference) {
   @keyframes langHint {
