@@ -17,8 +17,8 @@
     } catch (e) {}
     const u = new URLSearchParams(location.search).get("lang");
     if (u && LANGS.includes(u)) return u;
-    const n = (navigator.language || "").slice(0, 2).toLowerCase();
-    if (LANGS.includes(n)) return n;
+    // No navigator-language auto-detect: the site always opens in English by
+    // default, then a quiet hint nudges visitors toward the language switcher.
     return DEFAULT;
   }
 

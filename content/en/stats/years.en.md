@@ -1,5 +1,5 @@
 ---
-num: 15
+num: {{years_tech}}
 accent: +
-label: Years in tech (since 2009)
+label: Years in tech
 ---

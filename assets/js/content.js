@@ -11,7 +11,14 @@
    ============================================================ */
 (function () {
   const $ = (id) => document.getElementById(id);
-  const T = (k) => window.I18N.t(k);
+  // dynamic tenure: computed each load so it never needs a yearly edit.
+  // 2016 = first software-development role · 2011 = first tech role (systems analyst)
+  const YEAR_DEV = 2016, YEAR_TECH = 2011;
+  const yearsSince = (y) => Math.max(0, new Date().getFullYear() - y);
+  const vars = (s) => (s == null ? s : String(s)
+    .replace(/\{\{years_dev\}\}/g, yearsSince(YEAR_DEV))
+    .replace(/\{\{years_tech\}\}/g, yearsSince(YEAR_TECH)));
+  const T = (k) => vars(window.I18N.t(k));
 
   async function raw(path) {
     const r = await fetch(path, { cache: "no-store" });
@@ -55,7 +62,8 @@
         if (i > -1) meta[line.slice(0, i).trim().toLowerCase()] = line.slice(i + 1).trim();
       });
     }
-    return { meta, body: body.trim() };
+    for (const k in meta) meta[k] = vars(meta[k]);
+    return { meta, body: vars(body.trim()) };
   }
 
   const list = (v) => (v || "").split("|").map((s) => s.trim()).filter(Boolean);
@@ -108,9 +116,10 @@
     if (extra) a.push(extra);
     return a.join("");
   }
+  const FLAG = { pt: "🇧🇷", en: "🇺🇸", es: "🇪🇸" };
   function langSwitcher() {
     return `<div class="langsw" role="group" aria-label="${T("ui.language")}">${window.I18N.langs
-      .map((l) => `<button type="button" data-lang="${l}"${l === window.I18N.lang ? ' class="active"' : ""}>${window.I18N.label[l]}</button>`)
+      .map((l) => `<button type="button" data-lang="${l}"${l === window.I18N.lang ? ' class="active"' : ""}><span class="flag">${FLAG[l] || ""}</span>${window.I18N.label[l]}</button>`)
       .join("")}</div>`;
   }
   function imgOrPh(src, label, extraClass) {
@@ -559,6 +568,19 @@
     });
   }
 
+  // One-time, quiet nudge toward the language switcher on first load.
+  let langHinted = false;
+  function hintLang() {
+    if (langHinted) return;
+    langHinted = true;
+    setTimeout(() => {
+      document.querySelectorAll(".langsw").forEach((el) => {
+        el.classList.add("langsw--hint");
+        setTimeout(() => el.classList.remove("langsw--hint"), 1700);
+      });
+    }, 850);
+  }
+
   /* ============================================================
      Render pipeline (re-runnable on language change)
      ============================================================ */
@@ -596,6 +618,7 @@
 
     if (window.__wireSite) window.__wireSite();
     wireLangButtons();
+    hintLang();
     if (window.__observeReveals) window.__observeReveals();
   };
 

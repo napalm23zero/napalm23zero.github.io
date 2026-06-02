@@ -4,3 +4,6 @@
 # Original design reference — kept locally, not shipped to the repo
 Personal website (1)/
 Personal website (1).zip
+
+# Local-only résumé source dropped at repo root; the shipped copy is assets/files/resume.pdf
+/*.pdf

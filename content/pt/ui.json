@@ -9,7 +9,7 @@
   "hero.cta2": "Falar comigo",
 
   "resume.eyebrow": "O_currículo",
-  "resume.title": "Quinze anos, condensados. <span class=\"accent\">Clique para se aprofundar.</span>",
+  "resume.title": "{{years_tech}} anos, condensados. <span class=\"accent\">Clique para se aprofundar.</span>",
   "resume.intro": "Experiência, cargos anteriores e a stack completa, organizados para você bater o olho ou ir fundo. Tudo aqui espelha meu CV atual.",
   "resume.via": "via",
   "resume.tab_exp": "Experiência",
