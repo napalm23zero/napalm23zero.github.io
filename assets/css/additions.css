@@ -244,19 +244,22 @@
 }
 
 /* ---------- Nav: even spacing, fits on one line with the switcher ---------- */
-.nav__links { gap: 26px; }
+/* gap on the flex container is a hard floor: even when content nearly fills
+   the bar (e.g. longer PT labels), the logo / links / actions never touch. */
+.nav__inner { gap: clamp(18px, 2.2vw, 36px); }
+.nav__links { gap: clamp(14px, 1.5vw, 22px); }
 .nav__links a { white-space: nowrap; }
-.nav__cta { gap: 14px; }
+.nav__cta { gap: 10px; }
 .langsw { padding: 2px; }
-.langsw button { padding: 5px 9px; font-size: 11px; }
+.langsw button { padding: 4px 8px; font-size: 11px; }
 /* compact square icon button (résumé download) frees room so the nav has
    real breathing space and space-between gives even gaps again */
-.btn--icon { padding: 13px; }
+.btn--icon { padding: 11px; }
 .btn--icon .ph { font-size: 18px; }
 /* collapse to the burger a bit earlier so the full nav only shows when
    there's genuinely room for even spacing (avoids the logo touching links
    at tight desktop widths) */
-@media (max-width: 1180px) {
+@media (max-width: 1200px) {
   .nav__links, .nav__cta .btn { display: none; }
   .nav__burger { display: inline-flex; }
 }
@@ -282,7 +285,7 @@
 
 /* ---------- Language switcher: discrete flags + a one-time wink ---------- */
 .langsw button { display: inline-flex; align-items: center; gap: 5px; }
-.langsw .flag { width: 18px; height: 12px; border-radius: 2px; object-fit: cover; filter: grayscale(1); opacity: .55; transition: filter .25s var(--ease), opacity .25s var(--ease); }
+.langsw .flag { width: 16px; height: 11px; border-radius: 2px; object-fit: cover; filter: grayscale(1); opacity: .55; transition: filter .25s var(--ease), opacity .25s var(--ease); }
 .langsw button:hover .flag, .langsw button.active .flag { filter: none; opacity: 1; }
 @media (prefers-reduced-motion: no-preference) {
   @keyframes langHint {
