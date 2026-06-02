@@ -148,7 +148,7 @@ button { font: inherit; cursor: pointer; }
 .nav.is-stuck { background: rgba(5,5,6,0.78); backdrop-filter: blur(16px) saturate(140%); border-bottom-color: var(--line); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
 .nav__links { display: flex; align-items: center; gap: 32px; }
-.nav__links a { font-size: 14.5px; font-weight: 600; color: var(--fg-1); position: relative; transition: color .2s; }
+.nav__links a { font-size: 13.5px; font-weight: 600; color: var(--fg-1); position: relative; transition: color .2s; }
 .nav__links a::after { content: ""; position: absolute; left: 0; bottom: -7px; height: 2px; width: 0; background: var(--red); transition: width .25s var(--ease); }
 .nav__links a:hover { color: var(--fg); }
 .nav__links a:hover::after { width: 100%; }

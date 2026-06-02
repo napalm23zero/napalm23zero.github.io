@@ -259,7 +259,7 @@
 /* collapse to the burger a bit earlier so the full nav only shows when
    there's genuinely room for even spacing (avoids the logo touching links
    at tight desktop widths) */
-@media (max-width: 1200px) {
+@media (max-width: 1080px) {
   .nav__links, .nav__cta .btn { display: none; }
   .nav__burger { display: inline-flex; }
 }
