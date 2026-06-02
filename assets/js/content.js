@@ -72,6 +72,57 @@
   const eyebrow = (s) => (s || "").replace(/_/g, '<span class="us">_</span>');
   const tagsHTML = (v) => list(v).map((t) => `<span>${t}</span>`).join("");
 
+  // Tech logos for the skills tags (devicon, same source as the GitHub profile).
+  // Concepts (microservices, CDC/ETL, LLM agents…) intentionally have none.
+  // A missing/failed icon just removes itself, so the tag never breaks.
+  const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/";
+  const TECH_LOGOS = [
+    ["react native", "react/react-original.svg"],
+    ["github actions", "githubactions/githubactions-original.svg"],
+    ["java", "java/java-original.svg"],
+    ["kotlin", "kotlin/kotlin-original.svg"],
+    ["python", "python/python-original.svg"],
+    ["node", "nodejs/nodejs-original.svg"],
+    ["typescript", "typescript/typescript-original.svg"],
+    ["spring", "spring/spring-original.svg"],
+    ["quarkus", "quarkus/quarkus-original.svg"],
+    ["fastapi", "fastapi/fastapi-original.svg"],
+    ["react", "react/react-original.svg"],
+    ["next", "nextjs/nextjs-original.svg"],
+    ["angular", "angularjs/angularjs-original.svg"],
+    ["gcp", "googlecloud/googlecloud-original.svg"],
+    ["aws", "amazonwebservices/amazonwebservices-original-wordmark.svg"],
+    ["azure", "azure/azure-original.svg"],
+    ["docker", "docker/docker-original.svg"],
+    ["kubernetes", "kubernetes/kubernetes-original.svg"],
+    ["terraform", "terraform/terraform-original.svg"],
+    ["openshift", "https://cdn.simpleicons.org/redhatopenshift"],
+    ["postgre", "postgresql/postgresql-original.svg"],
+    ["oracle", "oracle/oracle-original.svg"],
+    ["mongo", "mongodb/mongodb-original.svg"],
+    ["redis", "redis/redis-original.svg"],
+    ["kafka", "apachekafka/apachekafka-original.svg"],
+    ["rabbitmq", "rabbitmq/rabbitmq-original.svg"],
+    ["jenkins", "jenkins/jenkins-original.svg"],
+    ["sonar", "sonarqube/sonarqube-original.svg"],
+    ["splunk", "https://cdn.simpleicons.org/splunk"],
+    ["pandas", "pandas/pandas-original.svg"],
+    ["numpy", "numpy/numpy-original.svg"],
+  ];
+  const techLogo = (tag) => {
+    const s = tag.toLowerCase();
+    for (const [k, path] of TECH_LOGOS) if (s.includes(k)) return path.startsWith("http") ? path : DEVICON + path;
+    return null;
+  };
+  const skillTagsHTML = (v) =>
+    list(v)
+      .map((t) => {
+        const src = techLogo(t);
+        const logo = src ? `<img class="tag__logo" src="${src}" alt="" loading="lazy" onerror="this.remove()">` : "";
+        return `<span>${logo}${t}</span>`;
+      })
+      .join("");
+
   async function singleton(name) {
     return parseFM(await text(name));
   }
@@ -297,7 +348,7 @@
       .map(
         (it) => `<div class="skillcard">
           <h4><i class="ph ${it.meta.icon || "ph-code"}"></i>${it.meta.title || ""}</h4>
-          <div class="tags">${tagsHTML(it.meta.tags)}</div>
+          <div class="tags">${skillTagsHTML(it.meta.tags)}</div>
         </div>`
       )
       .join("")}</div>`;

@@ -143,8 +143,11 @@
 .skillcard h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; display: flex; align-items: center; gap: 9px; }
 .skillcard h4 .ph { font-size: 17px; }
 .skillcard .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.skillcard .tags span { font-size: 13.5px; color: var(--fg-1); border: 1px solid var(--line-2); border-radius: 7px; padding: 6px 11px; font-weight: 500; transition: all .2s; }
+.skillcard .tags span { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; color: var(--fg-1); border: 1px solid var(--line-2); border-radius: 7px; padding: 6px 11px; font-weight: 500; transition: all .2s; }
 .skillcard .tags span:hover { border-color: var(--red); color: #fff; transform: translateY(-2px); }
+/* tech logos: discreet monochrome silhouette by default, original colour on hover */
+.tag__logo { width: 15px; height: 15px; object-fit: contain; filter: brightness(0) invert(1); opacity: .5; transition: filter .2s var(--ease), opacity .2s var(--ease); }
+.skillcard .tags span:hover .tag__logo { filter: none; opacity: 1; }
 @media (max-width: 680px){ .skills { grid-template-columns: 1fr; } }
 
 /* education / courses / languages */
