@@ -510,7 +510,8 @@
     const { meta } = await singleton("social");
     const host = location.hostname || "localhost";
     const ph = (icon, lines) => `<div class="social__ph"><i class="ph ${icon}"></i><p>${lines}</p></div>`;
-    let ig = meta.instagram
+    const dark = currentTheme() !== "light";
+    const ig = meta.instagram
       ? `<blockquote class="instagram-media" data-instgrm-permalink="${meta.instagram}" data-instgrm-version="14" style="width:100%;min-width:0;margin:0;background:#000"></blockquote>`
       : ph("ph-instagram-logo", T("ui.soon"));
     let tt;
@@ -518,35 +519,30 @@
       const id = (meta.tiktok.match(/video\/(\d+)/) || [])[1] || "";
       tt = `<blockquote class="tiktok-embed" cite="${meta.tiktok}" data-video-id="${id}" style="margin:0;min-width:0"><section></section></blockquote>`;
     } else tt = ph("ph-tiktok-logo", T("ui.soon"));
-    let tw = meta.twitch
-      ? `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(meta.twitch)}&parent=${host}&muted=true&autoplay=false" height="420" width="100%" allowfullscreen></iframe>`
+    const xt = meta.twitter
+      ? `<a class="twitter-timeline" data-theme="${dark ? "dark" : "light"}" data-chrome="noheader nofooter transparent" data-tweet-limit="3" href="https://twitter.com/${meta.twitter}?ref_src=twsrc%5Etfw">@${meta.twitter}</a>`
+      : ph("ph-x-logo", T("ui.soon"));
+    const tw = meta.twitch
+      ? `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(meta.twitch)}&parent=${host}&muted=true&autoplay=false" height="340" width="100%" allowfullscreen></iframe>`
       : ph("ph-twitch-logo", T("ui.soon"));
-    el.innerHTML = `
-      <div class="social__col ig">
-        <div class="social__bar"><i class="ph-fill ph-instagram-logo"></i><b>Instagram</b><a href="${meta.instagram_url || "https://instagram.com/"}" target="_blank" rel="noopener">${meta.instagram_handle || "@rodrigo"} <i class="ph ph-arrow-up-right"></i></a></div>
-        <div class="social__embed">${ig}</div>
-      </div>
-      <div class="social__col tt">
-        <div class="social__bar"><i class="ph-fill ph-tiktok-logo"></i><b>TikTok</b><a href="${meta.tiktok_url || "https://tiktok.com/"}" target="_blank" rel="noopener">${meta.tiktok_handle || "@rodrigo"} <i class="ph ph-arrow-up-right"></i></a></div>
-        <div class="social__embed">${tt}</div>
-      </div>
-      <div class="social__col tw">
-        <div class="social__bar"><i class="ph-fill ph-twitch-logo"></i><b>Twitch</b><a href="${meta.twitch_url || "https://twitch.tv/"}" target="_blank" rel="noopener">${meta.twitch_handle || "/rodrigo"} <i class="ph ph-arrow-up-right"></i></a></div>
-        <div class="social__embed">${tw}</div>
+    const yt = meta.youtube_channel
+      ? `<iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UU${meta.youtube_channel.replace(/^UC/, "")}&rel=0" width="100%" height="340" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+      : ph("ph-youtube-logo", T("ui.soon"));
+    const col = (cls, icon, name, url, handle, fb, embed) =>
+      `<div class="social__col ${cls}">
+        <div class="social__bar"><i class="ph-fill ${icon}"></i><b>${name}</b><a href="${url || fb}" target="_blank" rel="noopener">${handle} <i class="ph ph-arrow-up-right"></i></a></div>
+        <div class="social__embed">${embed}</div>
       </div>`;
-    if (meta.instagram) {
-      const s = document.createElement("script");
-      s.src = "https://www.instagram.com/embed.js";
-      s.async = true;
-      s.onload = () => window.instgrm && window.instgrm.Embeds.process();
-      document.body.appendChild(s);
-    }
-    if (meta.tiktok) {
-      const s = document.createElement("script");
-      s.src = "https://www.tiktok.com/embed.js";
-      s.async = true;
-      document.body.appendChild(s);
-    }
+    el.innerHTML =
+      col("ig", "ph-instagram-logo", "Instagram", meta.instagram_url, meta.instagram_handle || "@napalm23zero", "https://instagram.com/", ig) +
+      col("tt", "ph-tiktok-logo", "TikTok", meta.tiktok_url, meta.tiktok_handle || "@napalm23zero", "https://tiktok.com/", tt) +
+      col("xt", "ph-x-logo", "X", meta.twitter_url, meta.twitter_handle || "@napalm23zero", "https://x.com/", xt) +
+      col("tw", "ph-twitch-logo", "Twitch", meta.twitch_url, meta.twitch_handle || "/napalm23zero", "https://twitch.tv/", tw) +
+      col("yt", "ph-youtube-logo", "YouTube", meta.youtube_url, meta.youtube_handle || "@napalm23zero", "https://youtube.com/", yt);
+    const loadScript = (src, cb) => { const s = document.createElement("script"); s.src = src; s.async = true; if (cb) s.onload = cb; document.body.appendChild(s); };
+    if (meta.instagram) loadScript("https://www.instagram.com/embed.js", () => window.instgrm && window.instgrm.Embeds.process());
+    if (meta.tiktok) loadScript("https://www.tiktok.com/embed.js");
+    if (meta.twitter) loadScript("https://platform.twitter.com/widgets.js", () => window.twttr && window.twttr.widgets && window.twttr.widgets.load());
   }
 
   function renderGithubHead() {
