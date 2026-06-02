@@ -1,6 +1,6 @@
 ---
 eyebrow: About_me
-photo: assets/img/rodrigo-about.png
+photo: assets/img/rodrigo-about.jpg
 floatcap: <b>{{years_dev}}+ yrs</b> in production
 lead: Senior engineer with {{years_dev}}+ years building software and {{years_tech}}+ in tech overall, across very different domains: finance, tax, retail, travel, telecom. I keep an owner's instinct for the whole system, not just my slice of it.
 chips: Cross-domain Delivery | Distributed Systems | LLM Agents | Mentorship | API Contracts | Jiu-jitsu & calisthenics
