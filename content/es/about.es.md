@@ -1,6 +1,6 @@
 ---
 eyebrow: Sobre_mí
-photo:
+photo: assets/img/rodrigo-about.png
 floatcap: <b>{{years_dev}}+ años</b> en producción
 lead: Ingeniero senior con {{years_dev}}+ años construyendo software y {{years_tech}}+ en tecnología en general, en dominios muy distintos: finanzas, fiscal, retail, viajes, telecom. Mantengo instinto de dueño del sistema completo, no solo de mi parte.
 chips: Entrega multi-dominio | Sistemas Distribuidos | Agentes LLM | Mentoría | Contratos de API | Jiu-jitsu & calistenia
