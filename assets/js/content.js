@@ -630,20 +630,35 @@
     });
   }
 
+  // Swap the studio photos for their light-bg variants (rodrigo-x.jpg ->
+  // rodrigo-x-light.jpg). Done in JS for cross-browser reliability (CSS
+  // content:url fails in Firefox).
+  function applyThemePhotos(t) {
+    document.querySelectorAll(".hero__portrait img, .about__photo img, .resume__photo img").forEach((img) => {
+      if (!img.dataset.darkSrc) img.dataset.darkSrc = img.getAttribute("src") || "";
+      const dark = img.dataset.darkSrc;
+      if (!dark) return;
+      const light = dark.replace(/(\.[a-z0-9]+)$/i, "-light$1");
+      const next = t === "light" ? light : dark;
+      if (img.getAttribute("src") !== next) img.src = next;
+    });
+  }
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+  }
   function applyTheme(t) {
     document.documentElement.setAttribute("data-theme", t);
     try { localStorage.setItem("theme", t); } catch (e) {}
     document.querySelectorAll(".theme-toggle i").forEach((i) => {
       i.className = "ph " + (t === "light" ? "ph-moon" : "ph-sun");
     });
+    applyThemePhotos(t);
   }
   function wireTheme() {
     document.querySelectorAll(".theme-toggle").forEach((b) => {
-      b.addEventListener("click", () => {
-        const light = document.documentElement.getAttribute("data-theme") === "light";
-        applyTheme(light ? "dark" : "light");
-      });
+      b.addEventListener("click", () => applyTheme(currentTheme() === "light" ? "dark" : "light"));
     });
+    applyThemePhotos(currentTheme()); // sync freshly-rendered photos to the active theme
   }
 
   // One-time intro on first load: a quick bounce across the header items so

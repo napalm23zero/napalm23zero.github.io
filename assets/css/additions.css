@@ -331,10 +331,8 @@
 /* ---------- Light theme: tech logos as dark silhouettes (recolour on hover) ---------- */
 :root[data-theme="light"] .tag__logo { filter: brightness(0); opacity: .5; }
 
-/* ---------- Light theme: swap the dark-studio photos for light-bg versions ---------- */
-:root[data-theme="light"] .hero__portrait img { content: url("assets/img/rodrigo-hero-light.jpg"); }
-:root[data-theme="light"] .about__photo img { content: url("assets/img/rodrigo-about-light.jpg"); }
-:root[data-theme="light"] .resume__photo img { content: url("assets/img/rodrigo-desk-light.jpg"); object-position: 30% 50%; }
+/* ---------- Light theme: photo src swap is done in JS; keep the desk reframe ---------- */
+:root[data-theme="light"] .resume__photo img { object-position: 30% 50%; }
 
 /* ---------- Theme toggle (sun / moon) ---------- */
 .theme-toggle { width: 38px; height: 38px; flex: none; display: inline-grid; place-items: center; border-radius: 999px; border: 1px solid var(--line-2); background: var(--glass); color: var(--fg-1); font-size: 17px; transition: color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease); }
