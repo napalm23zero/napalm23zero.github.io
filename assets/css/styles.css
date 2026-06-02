@@ -8,15 +8,16 @@
 /* ---------- Tokens ---------- */
 :root {
   color-scheme: dark;
-  /* Surfaces — Hustle Black dominant, layered */
-  --black:   #000000;
-  --bg:      #050506;
-  --bg-1:    #0c0d0f;
-  --bg-2:    #131417;
-  --bg-3:    #1b1c20;
-  --gray:    #333333;          /* Hustle Gray */
-  --line:    #26272b;
-  --line-2:  #34353a;
+  /* Surfaces — Hustle Black dominant, layered (lifted ~3% off pure black:
+     a deep charcoal reads warmer/less harsh than literal #000) */
+  --black:   #080808;
+  --bg:      #0d0d0e;
+  --bg-1:    #141517;
+  --bg-2:    #1b1c1f;
+  --bg-3:    #232428;
+  --gray:    #3b3b3b;          /* Hustle Gray */
+  --line:    #2e2f33;
+  --line-2:  #3c3d42;
 
   /* Text */
   --white:   #ffffff;          /* Hustle White */
@@ -35,8 +36,8 @@
   --fg-max:       #ffffff;          /* brightest text / fills on surfaces */
   --glass:        rgba(255,255,255,0.02);
   --glass-line:   rgba(255,255,255,0.14);
-  --nav-bg:       rgba(5,6,7,0.72);
-  --nav-bg-solid: rgba(5,6,7,0.97);
+  --nav-bg:       rgba(13,14,15,0.72);
+  --nav-bg-solid: rgba(13,14,15,0.97);
   --code-fg:      #ff8a8a;
 
   /* Type */
