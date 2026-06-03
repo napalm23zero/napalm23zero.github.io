@@ -192,7 +192,10 @@
 .langsw button:hover { color: var(--fg-max); }
 .langsw button.active { background: var(--red); color: var(--red-ink); }
 .blogtop__right { display: flex; align-items: center; gap: 14px; }
-.mobile-menu .langsw { margin-top: 28px; align-self: flex-start; }
+/* prominent language switcher at the top of the mobile menu */
+.mobile-menu .langsw { align-self: stretch; gap: 8px; padding: 6px; margin: 4px 0 14px; border-radius: var(--r-md); }
+.mobile-menu .langsw button { flex: 1; justify-content: center; padding: 13px 10px; font-size: 14px; border-radius: var(--r-sm); }
+.mobile-menu .langsw .flag { width: 20px; height: 14px; }
 
 /* ---------- Hero: portrait fills the frame (object-fit: cover) ---------- */
 /* On desktop the photo column stretches to the headline's height and the
@@ -256,10 +259,12 @@
    there's genuinely room for even spacing (avoids the logo touching links
    at tight desktop widths) */
 @media (max-width: 1080px) {
-  /* collapsed top bar stays tidy: only logo + theme toggle + burger.
-     language switcher lives in the mobile menu at these widths. */
+  /* collapsed top bar: logo on the left, theme toggle + burger grouped on
+     the right. language switcher moves into the menu (prominent, on top). */
   .nav__links, .nav__cta .btn, .nav__cta .langsw { display: none; }
   .nav__burger { display: inline-flex; }
+  .nav__inner { gap: 12px; }
+  .nav__cta { margin-left: auto; }
 }
 
 /* ---------- Venture band: Hustle Tech (its own small section) ---------- */

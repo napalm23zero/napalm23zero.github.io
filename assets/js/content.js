@@ -216,11 +216,11 @@
     if (mobile) {
       mobile.innerHTML = `
         <button class="mobile-menu__close" id="menuClose" aria-label="Close menu"><i class="ph ph-x"></i></button>
+        ${langSwitcher()}
         ${links.map((l) => `<a href="${l.href}">${l.label.toLowerCase()}</a>`).join("")}
         <a href="blog.html">${T("nav.blog").toLowerCase()}</a>
         <a href="${SITE.resume}" target="_blank" rel="noopener">${T("nav.resume").toLowerCase()}</a>
-        <a href="#contact">${T("nav.contact").toLowerCase()}<span class="us">_</span></a>
-        ${langSwitcher()}${themeToggleHTML()}`;
+        <a href="#contact">${T("nav.contact").toLowerCase()}<span class="us">_</span></a>`;
     }
   }
 
