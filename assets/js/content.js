@@ -441,10 +441,14 @@
         <div class="cert__title">${c.title || ""}</div>
         <div class="cert__date">${c.date || ""}</div>
       </div>`;
+    const subLine = (c) => {
+      const base = `${c.issuer || ""} · ${c.date || ""}`;
+      return c.pdf ? `${base} · <a href="${c.pdf}" target="_blank" rel="noopener" class="modal__pdf"><i class="ph ph-file-pdf"></i> ${T("certs.viewpdf")}</a>` : base;
+    };
     const open = (c) => {
       if (!window.openModal) return;
-      if (c.image) window.openModal({ imgSrc: c.image, isImage: true, title: c.title, sub: `${c.issuer} · ${c.date}` });
-      else window.openModal({ html: `<div class="ph-img" data-label="${T("ui.soon")}" style="position:absolute;inset:0"></div>`, title: c.title, sub: `${c.issuer} · ${c.date}` });
+      if (c.image) window.openModal({ imgSrc: c.image, isImage: true, title: c.title, sub: subLine(c) });
+      else window.openModal({ html: `<div class="ph-img" data-label="${T("ui.soon")}" style="position:absolute;inset:0"></div>`, title: c.title, sub: subLine(c) });
     };
     const gallery = () => {
       const cells = CERTS.map((c, i) => `<div class="cert" data-ci="${i}">${cardHTML(c)}</div>`).join("");
