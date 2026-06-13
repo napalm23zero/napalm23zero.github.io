@@ -314,13 +314,16 @@
     if (!el) return;
     const { items } = await collection("experience");
     el.innerHTML = `<div class="timeline">${items
-      .map((it, i) => {
+      .map((it) => {
         const m = it.meta;
         const via = m.via ? ` <span style="color:var(--fg-3);font-size:.75em">${T("resume.via")} ${m.via}</span>` : "";
-        return `<details class="tl-item"${i === 0 ? " open" : ""}>
+        return `<details class="tl-item">
           <summary>
             <div class="tl-head">
-              <span class="tl-role">${m.role || ""} — <span class="tl-co">${m.company || ""}</span>${via}</span>
+              <div class="tl-titles">
+                <span class="tl-role">${m.role || ""}</span>
+                <span class="tl-org"><span class="tl-co">${m.company || ""}</span>${via}</span>
+              </div>
               <i class="ph ph-caret-down tl-chevron"></i>
               <div class="tl-meta"><span class="when">${m.dates || ""}</span><span>${m.location || ""}</span><span>${m.focus || ""}</span></div>
             </div>
