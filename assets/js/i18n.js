@@ -9,6 +9,15 @@
   const DEFAULT = "en";
   const LOCALE = { pt: "pt-BR", en: "en-US", es: "es-ES" };
   const LABEL = { pt: "PT", en: "EN", es: "ES" };
+  // Pretty URL per language (mirrors the routes resolved in 404.html).
+  // Default (English) stays prefix-free at the root; the hash is preserved.
+  // The path is kept slash-free so relative fetches still resolve from root.
+  // Only the SPA root carries these routes; blog.html keeps its own URL.
+  const ROUTE = { pt: "/pt", en: "/", es: "/es" };
+  const PRETTY_URLS = !/blog\.html$/i.test(location.pathname);
+  const syncURL = (l) => {
+    if (PRETTY_URLS) history.replaceState({}, "", (ROUTE[l] || "/") + location.hash);
+  };
 
   function detect() {
     try {
@@ -52,9 +61,12 @@
         localStorage.setItem("lang", l);
       } catch (e) {}
       document.documentElement.lang = l;
+      syncURL(l);
       if (window.__renderAll) await window.__renderAll();
     },
   };
 
   document.documentElement.lang = window.I18N.lang;
+  // Rewrite the entry URL to its pretty, prefix-clean form (e.g. /?lang=pt -> /br).
+  syncURL(window.I18N.lang);
 })();
