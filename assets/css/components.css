@@ -152,7 +152,7 @@
 @media (max-width: 680px){ .skills { grid-template-columns: 1fr; } }
 
 /* education / courses / languages */
-.edu { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+.edu { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: clamp(28px, 4vw, 56px); align-items: stretch; }
 @media (max-width: 900px){ .edu { grid-template-columns: 1fr; } }
 .edu__card { background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 26px; }
 .edu__card + .edu__card { margin-top: 16px; }
@@ -160,12 +160,12 @@
 .edu__inst { color: var(--red); font-family: var(--font-mono); font-size: 13px; margin-top: 6px; }
 .edu__when { color: var(--fg-3); font-family: var(--font-mono); font-size: 12px; margin-top: 4px; }
 .edu__desc { color: var(--fg-2); font-size: 15px; margin-top: 14px; }
-.edu__photo { position: relative; border-radius: var(--r-lg) var(--r-lg) 50px var(--r-lg); margin-bottom: 32px; }
-.edu__photo img { width: 100%; height: auto; display: block; border-radius: inherit; }
-.edu__photo::after { content: ""; position: absolute; right: -14px; bottom: -14px; width: 52%; height: 46%; border: 1px solid var(--line-2); border-right: 3px solid var(--red); border-radius: 0 0 var(--r-lg) 0; z-index: -1; }
-.edu__photo .float-cap { position: absolute; left: -18px; bottom: 28px; background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 12px 16px; box-shadow: var(--shadow); font-family: var(--font-mono); font-size: 12px; color: var(--fg-1); display: flex; align-items: center; gap: 10px; z-index: 3; }
+.edu__photo { position: relative; height: 100%; min-height: 460px; border-radius: var(--r-lg) var(--r-lg) 50px var(--r-lg); }
+.edu__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; border-radius: inherit; }
+.edu__photo::after { content: ""; position: absolute; left: -14px; top: -14px; width: 54%; height: 46%; border: 1px solid var(--line-2); border-left: 3px solid var(--red); border-radius: var(--r-lg) 0 0 0; z-index: -1; }
+.edu__photo .float-cap { position: absolute; right: -18px; bottom: 26px; background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-md); padding: 12px 16px; box-shadow: var(--shadow); font-family: var(--font-mono); font-size: 12px; color: var(--fg-1); display: flex; align-items: center; gap: 10px; z-index: 3; }
 .edu__photo .float-cap .ph { color: var(--red); font-size: 18px; }
-@media (max-width: 900px){ .edu__photo { max-width: 360px; } }
+@media (max-width: 900px){ .edu__photo { height: auto; aspect-ratio: 4/5; max-width: 360px; } }
 .talk { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .talk .ph { color: var(--red); font-size: 22px; flex: 0 0 auto; margin-top: 2px; }
 .talk b { font-family: var(--font-display); font-weight: 500; font-size: 16px; display: block; }

@@ -415,18 +415,18 @@
       .join("");
     el.innerHTML = `
       <div class="reveal">
+        <div class="edu__photo">
+          <img src="assets/img/rodrigo-grad.jpg" alt="Rodrigo at his graduation, in cap and gown" loading="lazy" />
+          <div class="float-cap"><i class="ph ph-graduation-cap"></i><span>~/education</span></div>
+        </div>
+      </div>
+      <div class="reveal" data-d="1">
         ${eduCards}
         <div class="edu__card" style="margin-top:24px">
           <h4 style="font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:6px">${T("education.talks")}</h4>
           ${talkRows}
         </div>
-      </div>
-      <div class="reveal" data-d="1">
-        <div class="edu__photo">
-          <img src="assets/img/rodrigo-grad.jpg" alt="Rodrigo at his graduation, in cap and gown" loading="lazy" />
-          <div class="float-cap"><i class="ph ph-graduation-cap"></i><span>~/education</span></div>
-        </div>
-        <div class="lang">${langRows}</div>
+        <div class="lang" style="margin-top:24px">${langRows}</div>
       </div>`;
   }
 
