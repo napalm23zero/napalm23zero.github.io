@@ -421,7 +421,13 @@
           ${talkRows}
         </div>
       </div>
-      <div class="reveal" data-d="1"><div class="lang">${langRows}</div></div>`;
+      <div class="reveal" data-d="1">
+        <div class="edu__photo">
+          <img src="assets/img/rodrigo-grad.jpg" alt="Rodrigo at his graduation, in cap and gown" loading="lazy" />
+          <div class="float-cap"><i class="ph ph-graduation-cap"></i><span>~/education</span></div>
+        </div>
+        <div class="lang">${langRows}</div>
+      </div>`;
   }
 
   async function renderCerts() {
@@ -617,7 +623,7 @@
   // rodrigo-x-light.jpg). Done in JS for cross-browser reliability (CSS
   // content:url fails in Firefox).
   function applyThemePhotos(t) {
-    document.querySelectorAll(".hero__portrait img, .about__photo img, .resume__photo img, .ctaband img").forEach((img) => {
+    document.querySelectorAll(".hero__portrait img, .about__photo img, .resume__photo img, .edu__photo img, .ctaband img").forEach((img) => {
       if (!img.dataset.darkSrc) img.dataset.darkSrc = img.getAttribute("src") || "";
       const dark = img.dataset.darkSrc;
       if (!dark) return;
