@@ -5,7 +5,7 @@ brand: Hustle Tech
 blog_label: El Blog
 blog_tagline: Ingeniero de Software Senior & Arquitecto · Banca & Fintech · agentes LLM
 wordmark: rodrigo<span class='us'>_</span>dantas
-nav: Sobre:#about | CV:#resume | Trabajo:#work | GitHub:#github | Certs:#certs | Vídeos:#videos
+nav: Sobre:#about | CV:#resume | Certs:#certs | Trabajo:#work | GitHub:#github | Vídeos:#videos
 resume: assets/files/resume.pdf
 email: rodrigo.dantas@hustletech.dev
 phone: +55 11 941-841-994
