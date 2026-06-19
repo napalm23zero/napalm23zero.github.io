@@ -41,6 +41,8 @@
   "certs.total": "total",
   "certs.viewall": "View all",
   "certs.viewpdf": "View PDF",
+  "certs.sortnewest": "Newest first",
+  "certs.sortoldest": "Oldest first",
 
   "videos.eyebrow": "Watch_me",
   "videos.title": "Talks &amp; builds on YouTube.",

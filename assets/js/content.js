@@ -436,7 +436,7 @@
     setHead("certsHead", "certs");
     const { items } = await collection("certificates");
     const CERTS = items.map((it) => it.meta);
-    const PREVIEW = 3;
+    const PREVIEW = 7;
     const cardHTML = (c) => `
       <div class="cert__media">
         ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : `<div class="ph-img" data-label="${T("ui.soon")}"></div>`}
@@ -457,11 +457,24 @@
       else window.openModal({ html: `<div class="ph-img" data-label="${T("ui.soon")}" style="position:absolute;inset:0"></div>`, title: c.title, sub: subLine(c) });
     };
     const gallery = () => {
-      const cells = CERTS.map((c, i) => `<div class="cert" data-ci="${i}">${cardHTML(c)}</div>`).join("");
+      // default curation (impact) order is the manifest order; the sort button
+      // re-orders by issue date, newest first, and toggles to oldest first.
+      let dir = "desc";
+      const byDate = () => [...CERTS].sort((a, b) =>
+        dir === "desc" ? (b.issued || "").localeCompare(a.issued || "") : (a.issued || "").localeCompare(b.issued || ""));
       window.openModal({
-        panel: `<div class="modal__panel-head"><i class="ph ph-seal-check"></i><h4>${T("certs.gallery")}</h4><small>${CERTS.length} ${T("certs.total")}</small></div><div class="cert-gallery">${cells}</div>`,
+        panel: `<div class="modal__panel-head"><i class="ph ph-seal-check"></i><h4>${T("certs.gallery")}</h4><small>${CERTS.length} ${T("certs.total")}</small><button type="button" class="cert-sort" id="certSort"></button></div><div class="cert-gallery" id="certGallery"></div>`,
       });
-      document.querySelectorAll("#modalFrame .cert-gallery .cert").forEach((node) => node.addEventListener("click", () => open(CERTS[+node.dataset.ci])));
+      const grid = $("certGallery");
+      const btn = $("certSort");
+      const paint = () => {
+        const ordered = byDate();
+        grid.innerHTML = ordered.map((c) => `<div class="cert">${cardHTML(c)}</div>`).join("");
+        [...grid.children].forEach((node, i) => node.addEventListener("click", () => open(ordered[i])));
+        btn.innerHTML = `<i class="ph ph-arrows-down-up"></i> ${dir === "desc" ? T("certs.sortnewest") : T("certs.sortoldest")}`;
+      };
+      btn.addEventListener("click", () => { dir = dir === "desc" ? "asc" : "desc"; paint(); });
+      paint();
     };
     el.innerHTML = "";
     CERTS.slice(0, PREVIEW).forEach((c, i) => {
