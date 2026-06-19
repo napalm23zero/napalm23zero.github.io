@@ -96,7 +96,7 @@ Edit the file in **each** `content/<lang>/` folder to keep every language in syn
 | Buttons, section titles & eyebrows | `content/<lang>/ui.json` |
 | Add a job | new `content/<lang>/experience/<id>.<lang>.md` + add `<id>` to that folder's `index.json` |
 | Add a portfolio project | new `content/<lang>/portfolio/<id>.<lang>.md` + `index.json` |
-| Add a certificate | new `content/<lang>/certificates/<id>.<lang>.md` + `index.json` |
+| Add a certificate | run `scripts/add_cert.py cert.pdf -t "Title" -i "Issuer" --issued YYYY-MM-DD` (writes the PDF, PNG, every `<lang>` `.md` and `index.json`) |
 | Add a YouTube video | new `content/<lang>/videos/<id>.<lang>.md` (`id:` = YouTube id) + `index.json` |
 | Set social embeds | `content/<lang>/social.<lang>.md` |
 | Publish a blog post | new `content/<lang>/posts/<id>.<lang>.md` + add `<id>` to that folder's `posts/index.json` |
