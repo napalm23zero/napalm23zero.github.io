@@ -41,8 +41,11 @@
   "certs.total": "en total",
   "certs.viewall": "Ver los",
   "certs.viewpdf": "Ver PDF",
-  "certs.sortnewest": "Más recientes",
-  "certs.sortoldest": "Más antiguos",
+  "certs.filter": "Filtrar por nombre o palabra clave…",
+  "certs.noresults": "Ningún certificado coincide con la búsqueda.",
+  "certs.sort.relevance": "Relevancia",
+  "certs.sort.alpha": "A–Z",
+  "certs.sort.date": "Fecha",
 
   "videos.eyebrow": "Mírame",
   "videos.title": "Charlas &amp; builds en YouTube.",

@@ -7,9 +7,11 @@ Does everything the manual flow does:
   3. writes the front-matter .md for every language
   4. appends <slug> to every certificates/index.json
 
-The manifest order is the on-page order (curated by impact), so new entries
-land at the end (lowest impact). Reorder index.json by hand when it matters.
-The gallery's sort button reads `issued`, so always pass a real ISO date.
+index.json only declares which certificates exist. The on-page order (relevance)
+lives in the CERT_RELEVANCE list in assets/js/content.js: a new certificate is
+unranked until you add its slug there, so it sorts to the end of the gallery.
+The gallery's date sort reads `issued`, so always pass a real ISO date, and
+`keywords` feeds the gallery's text filter.
 
 Usage:
   scripts/add_cert.py path/to/cert.pdf \
@@ -46,6 +48,7 @@ def main() -> int:
     p.add_argument("-i", "--issuer", required=True)
     p.add_argument("--issued", required=True, help="ISO date the cert was issued, e.g. 2026-06-17")
     p.add_argument("--slug", help="defaults to slugify('<issuer> <title>')")
+    p.add_argument("--keywords", help="pipe-separated search terms, e.g. 'java | spring | docker'")
     p.add_argument("--date", help="display year, defaults to the issued year")
     p.add_argument("--force", action="store_true", help="overwrite if the slug already exists")
     a = p.parse_args()
@@ -70,7 +73,8 @@ def main() -> int:
           f"issuer: {a.issuer}\n"
           f"date: {date}\n"
           f"issued: {a.issued}\n"
-          f"image: assets/certs/{slug}.png\n"
+          + (f"keywords: {a.keywords}\n" if a.keywords else "")
+          + f"image: assets/certs/{slug}.png\n"
           f"pdf: assets/certs/{slug}.pdf\n"
           "---\n")
     for lang in LANGS:
@@ -81,7 +85,8 @@ def main() -> int:
             data["items"].append(slug)
         idx.write_text("{ \"items\": [" + ", ".join(f'"{s}"' for s in data["items"]) + "] }\n")
 
-    print(f"Added {slug} ({date}) to {len(LANGS)} languages. Reorder index.json if impact demands it.")
+    print(f"Added {slug} ({date}) to {len(LANGS)} languages.")
+    print(f"  Rank it by adding \"{slug}\" to CERT_RELEVANCE in assets/js/content.js.")
     return 0
 
 

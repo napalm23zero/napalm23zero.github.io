@@ -41,8 +41,11 @@
   "certs.total": "no total",
   "certs.viewall": "Ver todos os",
   "certs.viewpdf": "Ver PDF",
-  "certs.sortnewest": "Mais recentes",
-  "certs.sortoldest": "Mais antigos",
+  "certs.filter": "Filtrar por nome ou palavra-chave…",
+  "certs.noresults": "Nenhum certificado corresponde à busca.",
+  "certs.sort.relevance": "Relevância",
+  "certs.sort.alpha": "A–Z",
+  "certs.sort.date": "Data",
 
   "videos.eyebrow": "Me_assista",
   "videos.title": "Palestras &amp; builds no YouTube.",

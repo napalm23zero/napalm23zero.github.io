@@ -430,13 +430,54 @@
       </div>`;
   }
 
+  // ===========================================================================
+  // Certificate relevance = our hand-picked ranking, most relevant first.
+  // This is the on-page order (preview grid + gallery default). To re-rank,
+  // just reorder this list. Any certificate missing here sorts to the end.
+  // index.json only declares which certificates exist; their order lives here.
+  // ===========================================================================
+  const CERT_RELEVANCE = [
+    "anthropic-claude-platform-101",
+    "anthropic-claude-code-in-action",
+    "anthropic-claude-code-101",
+    "anthropic-claude-cowork",
+    "anthropic-claude-101",
+    "alura-spring-mvc-1",
+    "alura-spring-mvc-2",
+    "alura-spring-boot",
+    "alura-maven",
+    "gdg-manaus-devfest-17",
+    "samsung-ocean-lean-startup-mvp",
+    "samsung-ocean-scrum-na-pratica",
+    "knowbe4-security-awareness-training-2022",
+    "knowbe4-gdpr-intro",
+    "knowbe4-ccpa",
+    "knowbe4-data-privacy",
+    "knowbe4-phishing-snapshots-03",
+    "knowbe4-phish-alert-button",
+    "knowbe4-when-you-report-we-get-stronger",
+  ];
+
   async function renderCerts() {
     const el = $("certsGrid");
     if (!el) return;
     setHead("certsHead", "certs");
     const { items } = await collection("certificates");
-    const CERTS = items.map((it) => it.meta);
+    const CERTS = items.map((it) => ({ ...it.meta, id: it.id }));
+    // relevance order is authoritative for display; unranked certs go last
+    const rank = (c) => { const i = CERT_RELEVANCE.indexOf(c.id); return i < 0 ? CERT_RELEVANCE.length : i; };
+    CERTS.sort((a, b) => rank(a) - rank(b));
     const PREVIEW = 7;
+    const norm = (s) => (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const tokenize = (s) => norm(s).split(/[^a-z0-9]+/).filter(Boolean);
+    // filter matches the title, issuer and keywords: every typed term must be a
+    // prefix of some word, so "jav" finds java and "ia" stays out of "criando".
+    const matches = (c, query) => {
+      const qt = tokenize(query);
+      if (!qt.length) return true;
+      const words = tokenize([c.title, c.issuer, c.keywords].join(" "));
+      return qt.every((t) => words.some((w) => w.startsWith(t)));
+    };
     const cardHTML = (c) => `
       <div class="cert__media">
         ${c.image ? `<img src="${c.image}" alt="${c.title}" loading="lazy">` : `<div class="ph-img" data-label="${T("ui.soon")}"></div>`}
@@ -457,23 +498,54 @@
       else window.openModal({ html: `<div class="ph-img" data-label="${T("ui.soon")}" style="position:absolute;inset:0"></div>`, title: c.title, sub: subLine(c) });
     };
     const gallery = () => {
-      // default curation (impact) order is the manifest order; the sort button
-      // re-orders by issue date, newest first, and toggles to oldest first.
-      let dir = "desc";
-      const byDate = () => [...CERTS].sort((a, b) =>
-        dir === "desc" ? (b.issued || "").localeCompare(a.issued || "") : (a.issued || "").localeCompare(b.issued || ""));
-      window.openModal({
-        panel: `<div class="modal__panel-head"><i class="ph ph-seal-check"></i><h4>${T("certs.gallery")}</h4><small>${CERTS.length} ${T("certs.total")}</small><button type="button" class="cert-sort" id="certSort"></button></div><div class="cert-gallery" id="certGallery"></div>`,
-      });
-      const grid = $("certGallery");
-      const btn = $("certSort");
-      const paint = () => {
-        const ordered = byDate();
-        grid.innerHTML = ordered.map((c) => `<div class="cert">${cardHTML(c)}</div>`).join("");
-        [...grid.children].forEach((node, i) => node.addEventListener("click", () => open(ordered[i])));
-        btn.innerHTML = `<i class="ph ph-arrows-down-up"></i> ${dir === "desc" ? T("certs.sortnewest") : T("certs.sortoldest")}`;
+      // three sort modes, only inside the modal. relevance is our order (above);
+      // alpha and date are logical. clicking the active mode flips its direction.
+      let mode = "relevance";
+      let query = "";
+      const dir = { relevance: "asc", alpha: "asc", date: "desc" };
+      const compare = {
+        relevance: (a, b) => rank(a) - rank(b),
+        alpha: (a, b) => (a.title || "").localeCompare(b.title || "", undefined, { sensitivity: "base" }),
+        date: (a, b) => (a.issued || "").localeCompare(b.issued || ""),
       };
-      btn.addEventListener("click", () => { dir = dir === "desc" ? "asc" : "desc"; paint(); });
+      window.openModal({
+        panel: `<div class="cert-toolbar">
+            <div class="modal__panel-head"><i class="ph ph-seal-check"></i><h4>${T("certs.gallery")}</h4><small id="certCount"></small></div>
+            <div class="cert-tools">
+              <label class="cert-search"><i class="ph ph-magnifying-glass"></i><input id="certFilter" type="search" autocomplete="off" placeholder="${T("certs.filter")}"></label>
+              <div class="cert-sorts" id="certSorts">
+                <button type="button" data-mode="relevance">${T("certs.sort.relevance")}</button>
+                <button type="button" data-mode="alpha">${T("certs.sort.alpha")}</button>
+                <button type="button" data-mode="date">${T("certs.sort.date")}</button>
+              </div>
+            </div>
+          </div>
+          <div class="cert-gallery" id="certGallery"></div>`,
+      });
+      const grid = $("certGallery"), count = $("certCount"), sorts = $("certSorts");
+      const paint = () => {
+        const list = CERTS.filter((c) => matches(c, query))
+          .sort((a, b) => { const r = compare[mode](a, b); return dir[mode] === "asc" ? r : -r; });
+        grid.innerHTML = list.length
+          ? list.map((c) => `<div class="cert">${cardHTML(c)}</div>`).join("")
+          : `<div class="cert-empty">${T("certs.noresults")}</div>`;
+        [...grid.querySelectorAll(".cert")].forEach((node, i) => node.addEventListener("click", () => open(list[i])));
+        count.textContent = query.trim() ? `${list.length} / ${CERTS.length}` : `${CERTS.length} ${T("certs.total")}`;
+        sorts.querySelectorAll("button").forEach((b) => {
+          const on = b.dataset.mode === mode;
+          b.classList.toggle("is-active", on);
+          b.querySelector(".ph")?.remove();
+          if (on) b.insertAdjacentHTML("beforeend", ` <i class="ph ph-caret-${dir[mode] === "asc" ? "up" : "down"}"></i>`);
+        });
+      };
+      sorts.addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        if (b.dataset.mode === mode) dir[mode] = dir[mode] === "asc" ? "desc" : "asc";
+        else mode = b.dataset.mode;
+        paint();
+      });
+      $("certFilter").addEventListener("input", (e) => { query = e.target.value; paint(); });
       paint();
     };
     el.innerHTML = "";
