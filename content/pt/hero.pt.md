@@ -1,9 +1,9 @@
 ---
 hello: Olá_mundo &nbsp;//&nbsp; São Paulo, BR
 headline: Sou o Rodrigo, | Arquiteto de <em>Software</em> | &amp; Engenheiro Sênior
-sub: Eu construo sistemas <b>Java / Python / Node / React</b> para domínios complexos: finanças, fiscal, varejo, viagens, enterprise. Da América Latina aos EUA e Europa. Ultimamente coloco <b>agentes LLM</b> para trabalhar nas partes difíceis: incidentes, compliance, code review.
-tag: {{years_dev}}+ ANOS · SÊNIOR / STAFF
-badge: Aberto a posições <b>IC sênior / staff</b>
+sub: Construo sistemas <b>Java / Spring</b> e Python para <b>banking &amp; fintech</b>, da América Latina aos EUA e Europa. Mais de uma década em backend e sistemas, agora trabalhando <b>AI-native</b> e com um portfólio hands-on de <b>GenAI local-first</b> que roda inteiro dentro do perímetro.
+tag: {{years_dev}}+ ANOS · ENG. SÊNIOR &amp; ARQUITETO
+badge: Aberto a vagas <b>full-time remote</b> · USD/EUR
 portrait: assets/img/rodrigo-hero.jpg
 marquee: Java 8→21 | Spring Boot | Quarkus | Python | Node.js | React | GCP | AWS | Kafka | Agentes LLM | Microsserviços | Finanças · Fiscal · Varejo · Viagens · Telecom
 ---

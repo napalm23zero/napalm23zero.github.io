@@ -1,5 +1,5 @@
 ---
-num: {{years_tech}}
+num: {{years_dev}}
 accent: +
-label: Anos em tecnologia
+label: Anos construindo software
 ---

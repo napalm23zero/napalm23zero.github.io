@@ -3,7 +3,7 @@ name: Rodrigo Dantas
 role: Ingeniero de Software Senior & Arquitecto
 brand: Hustle Tech
 blog_label: El Blog
-blog_tagline: Ingeniero de Software Senior & Arquitecto · Banca & Fintech · agentes LLM
+blog_tagline: Ingeniero de Software Senior & Arquitecto · Banca & Fintech · AI-native
 wordmark: rodrigo<span class='us'>_</span>dantas
 nav: Sobre:#about | CV:#resume | Certs:#certs | Trabajo:#work | GitHub:#github | Vídeos:#videos
 resume: assets/files/resume.pdf

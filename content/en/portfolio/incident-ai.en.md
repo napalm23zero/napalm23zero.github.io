@@ -1,6 +1,6 @@
 ---
-title: Incident Intelligence Agent
+title: Incident Triage Assistant
 cover:
-tags: LLM Agents | Splunk | Java | OpenShift
+tags: LLM-assisted | Splunk | Java | OpenShift
 ---
-LLM agents that generate Splunk queries on demand and cross-reference past RCAs, ~70% of recurring incidents resolved near-automatically, MTTR down ~60%.
+A personal LLM-assisted triage tool: generates Splunk queries on demand and surfaces related past incidents and RCAs, cutting average triage from ~1h to ~20min. It investigates and recommends; a human decides.

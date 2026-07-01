@@ -1,6 +1,6 @@
 ---
-title: Agente de Inteligência de Incidentes
+title: Assistente de Triagem de Incidentes
 cover:
-tags: Agentes LLM | Splunk | Java | OpenShift
+tags: Assistido por LLM | Splunk | Java | OpenShift
 ---
-Agentes LLM que geram consultas Splunk sob demanda e cruzam RCAs passadas, ~70% dos incidentes recorrentes resolvidos de forma quase automática, MTTR ~60% menor.
+Ferramenta pessoal de triagem assistida por LLM: gera consultas Splunk sob demanda e traz à tona incidentes e RCAs passados relacionados, cortando a triagem média de ~1h para ~20min. Ela investiga e recomenda; um humano decide.

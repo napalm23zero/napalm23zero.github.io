@@ -11,7 +11,7 @@
   "hero.cta2": "Hablemos",
 
   "resume.eyebrow": "El_CV",
-  "resume.title": "{{years_tech}} años, condensados. <span class=\"accent\">Haz clic para explorar.</span>",
+  "resume.title": "{{years_dev}} años, condensados. <span class=\"accent\">Haz clic para explorar.</span>",
   "resume.intro": "Experiencia, cargos anteriores y el stack completo, organizados para una lectura rápida o un análisis a fondo. Todo aquí refleja mi CV actual.",
   "resume.via": "vía",
   "resume.tab_exp": "Experiencia",

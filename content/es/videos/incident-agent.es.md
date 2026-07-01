@@ -1,5 +1,5 @@
 ---
 id: ScMzIvxBSi4
-title: Construyendo un agente de triaje de incidentes con IA sobre Splunk
+title: Construyendo una herramienta de triaje de incidentes asistida por LLM sobre Splunk
 duration: 18:22
 ---

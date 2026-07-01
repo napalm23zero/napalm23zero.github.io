@@ -1,5 +1,5 @@
 ---
 id: ScMzIvxBSi4
-title: Building an AI incident-triage agent over Splunk
+title: Building an LLM-assisted incident-triage tool over Splunk
 duration: 18:22
 ---

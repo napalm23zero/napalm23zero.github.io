@@ -1,5 +1,5 @@
 ---
-num: ~60
-accent: %
-label: de MTTR recortado con IA en el triaje
+num: 3
+accent: ×
+label: Triaje de incidentes más rápido (con IA)
 ---

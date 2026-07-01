@@ -1,5 +1,5 @@
 ---
-title: Founding Hustle Tech: building a profitable SaaS solo-first
+title: Founding Hustle Tech: building a self-sustaining SaaS solo-first
 date: 2025-11-20
 category: Founder
 excerpt: What it actually takes to architect, ship and run a B2B SaaS across 12 paying clients while keeping a senior engineering job.
@@ -18,12 +18,12 @@ Nothing exotic, everything deliberate:
 
 The constraint that shaped every decision: *I had to be able to operate this alone, at 1am, after a full day of client work.*
 
-## Agents as a force multiplier
+## LLM-assisted workflows as a force multiplier
 
-Internally I lean on LLM agents for automated testing, architecture review, vulnerability scanning and code-quality enforcement. Code-review turnaround went from a bottleneck to a non-event.
+Internally I lean on LLM-assisted workflows for test generation, architecture review, vulnerability scanning and code-quality enforcement. Code-review turnaround went from a bottleneck to a non-event, which is what makes solo-first sustainable.
 
 > Don't follow trends. Create them.
 
 ## What I learned
 
-Profitability is a forcing function. It made me ruthless about scope and generous about reliability, because every paying client is a relationship, not a metric.
+Covering its own costs is a forcing function. It made me ruthless about scope and generous about reliability, because every paying client is a relationship, not a metric.

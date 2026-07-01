@@ -1,5 +1,5 @@
 ---
-num: ~60
-accent: %
-label: MTTR cut with AI incident triage
+num: 3
+accent: ×
+label: Faster incident triage (AI-assisted)
 ---
